@@ -17,7 +17,7 @@ class KlasifikasiFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'tahun_masuk' => $this->faker->year(),
         ];
     }
 }

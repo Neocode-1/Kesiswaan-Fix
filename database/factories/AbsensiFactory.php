@@ -17,8 +17,8 @@ class AbsensiFactory extends Factory
     public function definition(): array
     {
         return [
-            'rekan_bulanan' => $this->faker->monthName . ' ' . now()->year, // contoh: "April 2025"
-            'upload_file' => 'absensi_' . $this->faker->unique()->numerify('###') . '.pdf', // contoh: "absensi_123.pdf"
+            'rekan_bulanan' => fake()->monthName . ' ' . now()->year, // contoh: "April 2025"
+            'upload_file' => 'absensi_' . fake()->unique()->numerify('###') . '.pdf', // contoh: "absensi_123.pdf"
         ];
     }
 }
