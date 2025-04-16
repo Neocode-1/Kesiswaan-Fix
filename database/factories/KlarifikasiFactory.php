@@ -17,7 +17,7 @@ class KlarifikasiFactory extends Factory
     public function definition(): array
     {
         return [
-            'tahun_masuk' => $this->faker->year(), // tahun acak misalnya 2020, 2021, dll
+             'tahun_masuk' => $this->faker->year(), // tahun acak misalnya 2020, 2021, dll
         ];
     }
 }
