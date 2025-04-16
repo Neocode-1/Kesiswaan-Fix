@@ -9,4 +9,14 @@ class Prestasi extends Model
 {
     /** @use HasFactory<\Database\Factories\PrestasiFactory> */
     use HasFactory;
+
+    protected $table = 'prestasis';
+
+    protected $fillable = [
+        'nama',
+        'nama_prestasi',
+        'tingkat',
+        'foto_up',
+        'tahun',
+    ];
 }

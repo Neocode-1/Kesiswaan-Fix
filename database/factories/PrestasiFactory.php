@@ -17,7 +17,17 @@ class PrestasiFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama' => $this->faker->name(),
+            'nama_prestasi' => $this->faker->randomElement([
+                'Lomba Cerdas Cermat',
+                'Juara Futsal',
+                'Olimpiade Matematika',
+                'Lomba Pidato',
+                'Lomba Desain Poster'
+            ]),
+            'tingkat' => $this->faker->randomElement(['Sekolah', 'Kecamatan', 'Kabupaten', 'Provinsi', 'Nasional']),
+            'foto_up' => 'prestasi_' . $this->faker->unique()->numerify('###') . '.jpg',
+            'tahun' => $this->faker->year(),
         ];
     }
 }

@@ -2,6 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Absensi;
+use App\Models\Ijazah;
+use App\Models\Kelas;
+use App\Models\Klarifikasi;
+use App\Models\Prestasi;
+use App\Models\Raport;
+use App\Models\Siswa;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +20,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::factory(50)->create();
+        Siswa::factory(50)->create();
+        Raport::factory(50)->create();
+        Ijazah::factory(50)->create();
+        Kelas::factory(50)->create();
+        Absensi::factory(50)->create();
+        Prestasi::factory(50)->create();
+        Klarifikasi::factory(50)->create();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class RaportFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(), // Membuat user otomatis jika tidak disediakan
+            'upload_file' => 'raport_' . $this->faker->unique()->numerify('###') . '.pdf',
+            'catatan' => $this->faker->paragraph,
         ];
     }
 }

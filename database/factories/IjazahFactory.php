@@ -17,7 +17,8 @@ class IjazahFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'upload_file' => 'ijazah_' . $this->faker->unique()->numerify('###') . '.pdf',
+            'tahun_lulus' => $this->faker->year(), // misalnya 2020, 2021, dst
         ];
     }
 }

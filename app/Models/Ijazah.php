@@ -9,4 +9,11 @@ class Ijazah extends Model
 {
     /** @use HasFactory<\Database\Factories\IjazahFactory> */
     use HasFactory;
+
+    protected $table = 'ijazahs';
+
+    protected $fillable = [
+        'upload_file',
+        'tahun_lulus',
+    ];
 }
