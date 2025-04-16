@@ -9,4 +9,10 @@ class Angkatan extends Model
 {
     /** @use HasFactory<\Database\Factories\AngkatanFactory> */
     use HasFactory;
+
+    protected $table = 'angkatans';
+
+    protected $fillable = [
+        'tahun',
+    ];
 }

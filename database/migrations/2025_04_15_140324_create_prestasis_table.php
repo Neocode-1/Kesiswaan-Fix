@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,6 +14,11 @@ return new class extends Migration
     {
         Schema::create('prestasis', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('nama_prestasi');
+            $table->string('tingkat');
+            $table->string('foto_up');
+            $table->string('tahun');
             $table->timestamps();
         });
     }

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('raports', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // relasi ke users.id
+            $table->string('upload_file');
+            $table->text('catatan');
             $table->timestamps();
         });
     }

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
+            $table->string('rekan_bulanan');
+            $table->string('upload_file');
             $table->timestamps();
         });
     }
