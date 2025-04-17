@@ -12,6 +12,7 @@ use App\Models\Angkatan;
 use App\Models\Prestasi;
 use App\Models\Klasifikasi;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +21,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(50)->create();
+        User::factory()->create([
+            'name' => 'Salman',
+            'email' => 'salman16@gmail.com',
+            'role' => 'Admin',
+            'password' => Hash::make('123')
+        ]);
         Siswa::factory(50)->create();
         Raport::factory(50)->create();
         Ijazah::factory(50)->create();
