@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AngkatanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KlarifikasiController;
@@ -17,3 +18,4 @@ Route::resource('/siswa', SiswaController::class);
 Route::resource('/angkatan', AngkatanController::class);
 Route::resource('/kelas', KelasController::class);
 Route::resource('/klarifikasi', KlarifikasiController::class);
+Route::resource('/absensi', AbsensiController::class);
