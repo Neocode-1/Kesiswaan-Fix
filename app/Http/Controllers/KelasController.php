@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class KelasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //Untuk menampilkan semua data
-        $user = User::all();
+        $kelas = Kelas::all();
         return response()->json([
             'status' => true,
-            'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'message' =>  'data berhasil di tampilkan',
+            'data' => $kelas
         ]);
     }
 
@@ -27,11 +26,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+        $validator = Validator::make($request->all(), [
+            'nama_kelas' => 'required',
+            'tingkat' => 'required',
+            'kebutuhan' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -39,17 +37,16 @@ class UserController extends Controller
                 'status' => false,
                 'message' => 'validasi gagal',
                 'error' => $validator->errors(),
-                'data' => []
-            ], 422);
+            ]);
         }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::create($request->all());
+        $kelas = Kelas::create($request->all());
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ], 201);
+            'data' => $kelas
+        ]);
+
     }
 
     /**
@@ -57,12 +54,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        // Untuk menampilkan data berdasarkan id
-        $user = User::findOrFail($id);
+        $kelas = Kelas::findOrFail($id);
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'data' => $kelas
         ]);
     }
 
@@ -71,12 +67,10 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //Proses untuk update data
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+        $validator = Validator::make($request->all(), [
+            'nama_kelas' => 'required',
+            'tingkat' => 'required',
+            'kebutuhan' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -84,17 +78,16 @@ class UserController extends Controller
                 'status' => false,
                 'message' => 'validasi gagal',
                 'error' => $validator->errors(),
-            ], 422);
+            ]);
         }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::findOrFail($id);
-        $user->update($request->all());
+        $kelas = Kelas::findOrFail($id);
+        $kelas->update($request->all());
         return response()->json([
             'status' => true,
-            'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ],);
+            'message' => 'data berhasil di perbarui',
+            'data' => $kelas
+        ]);
     }
 
     /**
@@ -102,13 +95,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //Proses untuk menghapus data
-        $user = User::findOrFail($id);
-        $user->delete();
+        $kelas = Kelas::findOrFail($id);
+        $kelas->delete();
         return response()->json([
-            'status' => true,
+            'status' =>  true,
             'message' => 'data berhasil di hapus',
-            'data' => $user
+            'data' => $kelas
         ]);
     }
 }
