@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Klarifikasi;
+use App\Models\Klasifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class KlarifikasiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //Untuk menampilkan semua data
-        $user = User::all();
+        $klarifikasi = Klarifikasi::all();
         return response()->json([
             'status' => true,
-            'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'message' => 'data berhasil  di tampilkan',
+            'data' => $klarifikasi
         ]);
     }
 
@@ -27,11 +27,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+        $validator = Validator::make($request->all(), [
+            'tahun_masuk' => 'required|numeric',
         ]);
 
         if($validator->fails()) {
@@ -39,17 +36,15 @@ class UserController extends Controller
                 'status' => false,
                 'message' => 'validasi gagal',
                 'error' => $validator->errors(),
-                'data' => []
-            ], 422);
+            ]);
         }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::create($request->all());
+        $klarifikasi = Klarifikasi::create($request->all());
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ], 201);
+            'data' => $klarifikasi
+        ]);
     }
 
     /**
@@ -57,12 +52,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        // Untuk menampilkan data berdasarkan id
-        $user = User::findOrFail($id);
+        $klarifikasi = Klarifikasi::findOrFail($id);
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'data' => $klarifikasi
         ]);
     }
 
@@ -71,30 +65,25 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //Proses untuk update data
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+        $validator = Validator::make($request->all(), [
+            'tahun_masuk' => 'required|numeric',
         ]);
 
         if($validator->fails()) {
             return response()->json([
                 'status' => false,
-                'message' => 'validasi gagal',
+                'message' => 'validasi  gagal',
                 'error' => $validator->errors(),
-            ], 422);
+            ]);
         }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::findOrFail($id);
-        $user->update($request->all());
+        $klarifikasi = Klarifikasi::findOrFail($id);
+        $klarifikasi->update($request->all());
         return response()->json([
             'status' => true,
-            'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ],);
+            'message' => 'data berhasil di ubah',
+            'data' => $klarifikasi
+        ]);
     }
 
     /**
@@ -102,13 +91,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //Proses untuk menghapus data
-        $user = User::findOrFail($id);
-        $user->delete();
+        $klarifikasi = Klarifikasi::findOrFail($id);
+        $klarifikasi->delete();
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di hapus',
-            'data' => $user
+            'data' => $klarifikasi
         ]);
     }
 }
