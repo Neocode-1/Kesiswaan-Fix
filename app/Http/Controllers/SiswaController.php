@@ -19,7 +19,7 @@ class SiswaController extends Controller
             'status' =>  true,
             'message' => 'data berhasil di tampilkan',
             'data' => $siswa
-        ]);
+        ], 200);
     }
 
     /**
@@ -62,7 +62,7 @@ class SiswaController extends Controller
                 'status' => true,
                 'message' => 'data berhasil di tambahkan',
                 'data' => $siswa
-            ]);
+            ], 201);
         }
     }
 
@@ -76,7 +76,7 @@ class SiswaController extends Controller
             'status' => true,
             'message' => 'data berhasil di tampilkan',
             'data' => $siswa
-        ]);
+        ], 200);
     }
 
     /**
@@ -105,7 +105,7 @@ class SiswaController extends Controller
             'status' => true,
             'message' => 'data berhasil di tambahkan',
             'data' => $siswa
-        ]);
+        ], 201);
     }
 
     /**
@@ -119,6 +119,6 @@ class SiswaController extends Controller
             'status' => true,
             'message' => 'data berhasil di hapus',
             'data' => $siswa
-        ]);
+        ], 200);
     }
 }
