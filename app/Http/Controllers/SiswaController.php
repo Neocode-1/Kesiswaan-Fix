@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //Untuk menampilkan semua data
-        $user = User::all();
+        $siswa = Siswa::all();
+        // return view('siswa.index', compact('siswa'));
         return response()->json([
-            'status' => true,
+            'status' =>  true,
             'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'data' => $siswa
         ]);
     }
 
@@ -28,10 +28,26 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+        'nama' => 'required',
+        'nisn' => 'required'| 'numeric',
+        'ttl' => 'required',
+        'jenis_kelamin' => 'required',
+        'agama' => 'required',
+        'sklh_asal' => 'required',
+        'tgl_masuk' => 'required',
+        'tgl_keluar' => 'required',
+        'status_klrga' => 'required',
+        'anak_ke' => 'required' | 'numeric',
+        'alamat' => 'required',
+        'telp_rumah' => 'required'|'numeric',
+        'status_pip' => 'required',
+        'nama_ortu' => 'required',
+        'alamat_ortu' => 'required',
+        'no_telp' => 'required'|'numeric',
+        'pekerjaan' => 'required',
+        'nama_wali' => 'required',
+        'alamat_wali' => 'required',
+        'pekerjaan_wali' => 'required',
         ]);
 
         if($validator->fails()) {
@@ -39,17 +55,15 @@ class UserController extends Controller
                 'status' => false,
                 'message' => 'validasi gagal',
                 'error' => $validator->errors(),
-                'data' => []
             ], 422);
-        }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::create($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ], 201);
+            $siswa = Siswa::create($request->all());
+            return response()->json([
+                'status' => true,
+                'message' => 'data berhasil di tambahkan',
+                'data' => $siswa
+            ]);
+        }
     }
 
     /**
@@ -57,12 +71,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        // Untuk menampilkan data berdasarkan id
-        $user = User::findOrFail($id);
+        $siswa = Siswa::findOrFail($id);
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'data' => $siswa
         ]);
     }
 
@@ -71,7 +84,6 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //Proses untuk update data
         $validator = Validator::make($request->all(),[
             'name' => 'required',
             'email' => 'required|email',
@@ -87,14 +99,13 @@ class UserController extends Controller
             ], 422);
         }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::findOrFail($id);
-        $user->update($request->all());
+        $siswa = Siswa::findOrFail($id);
+        $siswa->update($request->all());
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ],);
+            'data' => $siswa
+        ]);
     }
 
     /**
@@ -102,13 +113,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //Proses untuk menghapus data
-        $user = User::findOrFail($id);
-        $user->delete();
+        $siswa = Siswa::findOrFail($id);
+        $siswa->delete();
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di hapus',
-            'data' => $user
+            'data' => $siswa
         ]);
     }
 }

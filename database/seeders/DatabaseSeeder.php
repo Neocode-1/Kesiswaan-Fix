@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Absensi;
+use App\Models\Angkatan;
 use App\Models\Ijazah;
 use App\Models\Kelas;
 use App\Models\Klarifikasi;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(50)->create();
         Siswa::factory(50)->create();
+        Angkatan::factory(50)->create();
         Raport::factory(50)->create();
         Ijazah::factory(50)->create();
         Kelas::factory(50)->create();
