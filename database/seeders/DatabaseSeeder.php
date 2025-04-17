@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Models\Absensi;
-use App\Models\Ijazah;
-use App\Models\Kelas;
-use App\Models\Klarifikasi;
-use App\Models\Prestasi;
-use App\Models\Raport;
-use App\Models\Siswa;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Kelas;
+use App\Models\Siswa;
+use App\Models\Ijazah;
+use App\Models\Raport;
+use App\Models\Absensi;
+use App\Models\Angkatan;
+use App\Models\Prestasi;
+use App\Models\Klasifikasi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         Kelas::factory(50)->create();
         Absensi::factory(50)->create();
         Prestasi::factory(50)->create();
-        Klarifikasi::factory(50)->create();
+        Klasifikasi::factory(50)->create();
+        Angkatan::factory(50)->create();
     }
 }
