@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Kelas extends Model
 {
@@ -17,4 +18,9 @@ class Kelas extends Model
         'tingkat',
         'kebutuhan',
     ];
+
+    public function siswas(): BelongsToMany
+    {
+        return $this->belongsToMany(Siswa::class);
+    }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ijazah extends Model
 {
@@ -16,4 +17,9 @@ class Ijazah extends Model
         'upload_file',
         'tahun_lulus',
     ];
+
+    public function siswa(): BelongsTo
+    {
+        return $this->belongsTo(Siswa::class);
+    }
 }

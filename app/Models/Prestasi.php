@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Siswa;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Prestasi extends Model
 {
@@ -19,4 +21,9 @@ class Prestasi extends Model
         'foto_up',
         'tahun',
     ];
+
+    public function siswa(): BelongsTo
+    {
+        return $this->belongsTo(Siswa::class);
+    }
 }
