@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Angkatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class AngkatanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //Untuk menampilkan semua data
-        $user = User::all();
+        $angkatan = Angkatan::all();
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'data' => $angkatan
         ]);
     }
 
@@ -28,28 +27,23 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+            'tahun' => 'required| numeric',
         ]);
-
+        
         if($validator->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => 'validasi gagal',
                 'error' => $validator->errors(),
-                'data' => []
-            ], 422);
+            ]);
         }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::create($request->all());
+        $angkatan = Angkatan::create($request->all());
         return response()->json([
             'status' => true,
-            'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ], 201);
+            'message' => 'data berhasil di tambakan',
+            'data' => $angkatan
+        ]);
     }
 
     /**
@@ -57,12 +51,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        // Untuk menampilkan data berdasarkan id
-        $user = User::findOrFail($id);
+        $angkatan = Angkatan::findOrFail($id);
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'data' => $angkatan
         ]);
     }
 
@@ -71,12 +64,8 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //Proses untuk update data
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+        $validator = Validator::make($request->all(), [
+            'tahun' => 'required| numeric',
         ]);
 
         if($validator->fails()) {
@@ -84,17 +73,16 @@ class UserController extends Controller
                 'status' => false,
                 'message' => 'validasi gagal',
                 'error' => $validator->errors(),
-            ], 422);
+            ]);
         }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::findOrFail($id);
-        $user->update($request->all());
+        $angkatan = Angkatan::findOrFail($id);
+        $angkatan->update($request->all());
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ],);
+            'data' => $angkatan
+        ]);
     }
 
     /**
@@ -102,13 +90,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //Proses untuk menghapus data
-        $user = User::findOrFail($id);
-        $user->delete();
+        $angkatan = Angkatan::findOrFail($id);
+        $angkatan->delete();
         return response()->json([
-            'status' => true,
+            'status' =>  true,
             'message' => 'data berhasil di hapus',
-            'data' => $user
+            'data' =>  $angkatan
         ]);
     }
 }
