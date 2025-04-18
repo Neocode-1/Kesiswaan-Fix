@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Prestasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class PrestasiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //Untuk menampilkan semua data
-        $user = User::all();
+        $prestasi = Prestasi::all();
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'data' => $prestasi
         ]);
     }
 
@@ -27,29 +26,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+        $validator = Validator::make($request->all(), [
+        'nama' => 'required',
+        'nama_prestasi' => 'required',
+        'tingkat' => 'required',
+        'foto_up' => 'required',
+        'tahun' => 'required',
         ]);
 
         if($validator->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => 'validasi gagal',
-                'error' => $validator->errors(),
-                'data' => []
-            ], 422);
+                'error' => $validator->errors()
+            ]);
         }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::create($request->all());
+        $prestasi = Prestasi::create($request->all());
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ], 201);
+            'data' => $prestasi
+        ]);
     }
 
     /**
@@ -57,12 +55,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        // Untuk menampilkan data berdasarkan id
-        $user = User::findOrFail($id);
+        $prestasi = Prestasi::findOrFail($id);
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di tampilkan',
-            'data' => $user
+            'data' => $prestasi
         ]);
     }
 
@@ -71,30 +68,29 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //Proses untuk update data
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+        'nama_prestasi' => 'required',
+        'tingkat' => 'required',
+        'foto_up' => 'required',
+        'tahun' => 'required',
         ]);
 
         if($validator->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => 'validasi gagal',
-                'error' => $validator->errors(),
-            ], 422);
+                'error' => $validator->errors()
+            ]);
         }
 
-        // menunjukan jika data itu sukses di tambahkan
-        $user = User::findOrFail($id);
-        $user->update($request->all());
+        $prestasi = Prestasi::findOrFail($id);
+        $prestasi->update($request->all());
         return response()->json([
             'status' => true,
-            'message' => 'data berhasil di tambahkan',
-            'data' => $user
-        ],);
+            'message' => 'data berhasil di perbarui',
+            'data' => $prestasi
+        ]);
     }
 
     /**
@@ -102,13 +98,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //Proses untuk menghapus data
-        $user = User::findOrFail($id);
-        $user->delete();
+        $prestasi = Prestasi::findOrFail($id);
+        $prestasi->delete();
         return response()->json([
             'status' => true,
             'message' => 'data berhasil di hapus',
-            'data' => $user
+            'data' => $prestasi
         ]);
+
     }
 }
