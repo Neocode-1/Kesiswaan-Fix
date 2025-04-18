@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AngkatanController;
+use App\Http\Controllers\IjazahController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KlarifikasiController;
 use App\Http\Controllers\PrestasiController;
@@ -23,3 +24,4 @@ Route::resource('/klarifikasi', KlarifikasiController::class);
 Route::resource('/absensi', AbsensiController::class);
 Route::resource('/prestasi', PrestasiController::class);
 Route::resource('/rapot', RaportController::class);
+Route::resource('ijazah', IjazahController::class);
