@@ -85,10 +85,26 @@ class SiswaController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
+            'nama' => 'required',
+        'nisn' => 'required'| 'numeric',
+        'ttl' => 'required',
+        'jenis_kelamin' => 'required',
+        'agama' => 'required',
+        'sklh_asal' => 'required',
+        'tgl_masuk' => 'required',
+        'tgl_keluar' => 'required',
+        'status_klrga' => 'required',
+        'anak_ke' => 'required' | 'numeric',
+        'alamat' => 'required',
+        'telp_rumah' => 'required'|'numeric',
+        'status_pip' => 'required',
+        'nama_ortu' => 'required',
+        'alamat_ortu' => 'required',
+        'no_telp' => 'required'|'numeric',
+        'pekerjaan' => 'required',
+        'nama_wali' => 'required',
+        'alamat_wali' => 'required',
+        'pekerjaan_wali' => 'required',
         ]);
 
         if($validator->fails()) {
