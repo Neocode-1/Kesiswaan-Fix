@@ -16,9 +16,11 @@ class AbsensiFactory extends Factory
      */
     public function definition(): array
     {
+        $seed = fake()->unique()->uuid;
+        $url = "https://picsum.photos/seed/$seed/200/300";
         return [
-            'rekan_bulanan' => fake()->monthName . ' ' . now()->year, // contoh: "April 2025"
-            'upload_file' => 'absensi_' . fake()->unique()->numerify('###') . '.pdf', // contoh: "absensi_123.pdf"
+            'rekap_bulanan' => fake()->date(),
+            'upload_file' => $url,
         ];
     }
 }

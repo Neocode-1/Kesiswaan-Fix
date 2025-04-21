@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -11,8 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('siswa_families', function (Blueprint $table) {
+        Schema::create('prestasis', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('nama_prestasi');
+            $table->string('tingkat');
+            $table->string('foto_upload');
+            $table->year('tahun');
+            $table->unsignedBigInteger('siswa_id')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('siswa_families');
+        Schema::dropIfExists('prestasis');
     }
 };

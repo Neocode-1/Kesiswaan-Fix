@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('klasifikasis', function (Blueprint $table) {
+        Schema::create('ijazahs', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun_masuk');
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->unsignedBigInteger('klasifikasi_id')->nullable();
+            $table->unsignedBigInteger('siswa_id')->nullable();
+            $table->year('tahun_lulus');
+            $table->string('upload_file');
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('klarifikasis');
+        Schema::dropIfExists('ijazahs');
     }
 };

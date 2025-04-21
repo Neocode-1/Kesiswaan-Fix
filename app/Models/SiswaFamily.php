@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Siswa_family extends Model
+class SiswaFamily extends Model
 {
     /** @use HasFactory<\Database\Factories\SiswaFamilyFactory> */
     use HasFactory;
@@ -27,8 +27,8 @@ class Siswa_family extends Model
         'pekerjaan_ibu',
         'nama_wali',
         'alamat_wali',
-        'pekerjaan_wali',
         'no_telp_wali',
+        'pekerjaan_wali',
         'siswa_id',
     ];
 
