@@ -22,59 +22,38 @@ class Siswa extends Model
         'ttl',
         'jenis_kelamin',
         'agama',
-        'sklh_asal',
-        'tgl_masuk',
-        'tgl_keluar',
-        'status_klrga',
-        'anak_ke',
         'alamat',
         'telp_rumah',
+        'sekolah_asal',
+        'tgl_masuk',
+        'tgl_keluar',
         'status_pip',
-        'nama_ortu',
-        'alamat_ortu',
-        'no_telp',
-        'pekerjaan',
-        'nama_wali',
-        'alamat_wali',
-        'pekerjaan_wali',
+        'admin_id',
+        'klasifikasi_id',
     ];
 
-    public function user(): BelongsTo
+    public function admin(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    public function klasifikasi(): BelongsTo
+    {
+        return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
     }
 
     public function raports(): HasMany
     {
-        return $this->hasMany(Raport::class);
-    }
-
-    public function absensis(): HasMany
-    {
-        return $this->hasMany(Absensi::class);
+        return $this->hasMany(Raport::class, 'siswa_id');
     }
 
     public function ijazahs(): HasMany
     {
-        return $this->hasMany(Ijazah::class);
+        return $this->hasMany(Ijazah::class, 'siswa_id');
     }
 
     public function prestasis(): HasMany
     {
-        return $this->hasMany(Prestasi::class);
-    }
-
-    public function angkatan(): BelongsTo
-    {
-        return $this->belongsTo(Angkatan::class);
-    }
-
-    public function kelas(): BelongsToMany
-    {
-        return $this->belongsToMany(Kelas::class);
-    }
-    public function klasifikasi(): BelongsTo
-    {
-        return $this->belongsTo(Klasifikasi::class);
+        return $this->hasMany(Prestasi::class, 'siswa_id');
     }
 }

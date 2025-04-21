@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Kelas extends Model
@@ -17,10 +18,11 @@ class Kelas extends Model
         'nama_kelas',
         'tingkat',
         'kebutuhan',
+        'absensi_id',
     ];
 
-    public function siswas(): BelongsToMany
+    public function absensis(): BelongsTo
     {
-        return $this->belongsToMany(Siswa::class);
+        return $this->belongsTo(Absensi::class, 'absensi_id');
     }
 }

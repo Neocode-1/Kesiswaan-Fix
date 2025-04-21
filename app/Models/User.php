@@ -21,7 +21,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'is_aktif',
         'role',
         'password',
     ];
@@ -49,8 +48,24 @@ class User extends Authenticatable
         ];
     }
 
+    public function klasifikasis(): HasMany
+    {
+        return $this->hasMany(Klasifikasi::class, 'admin_id');
+    }
     public function siswas(): HasMany
     {
-        return $this->hasMany(Siswa::class);
+        return $this->hasMany(Siswa::class, 'admin_id');
+    }
+    public function absensis(): HasMany
+    {
+        return $this->hasMany(Absensi::class, 'admin_id');
+    }
+    public function raports(): HasMany
+    {
+        return $this->hasMany(Raport::class, 'admin_id');
+    }
+    public function ijazahs(): HasMany
+    {
+        return $this->hasMany(Ijazah::class, 'admin_id');
     }
 }

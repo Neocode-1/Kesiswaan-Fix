@@ -17,30 +17,30 @@ class SiswaFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => $this->faker->name,
-            'nisn' => $this->faker->unique()->numerify('##########'),
-            'ttl' => $this->faker->date('Y-m-d') . ' di ' . $this->faker->city,
-            'jenis_kelamin' => $this->faker->randomElement(['L', 'P']),
-            'agama' => $this->faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']),
-            'sklh_asal' => $this->faker->company . ' School',
-            'tgl_masuk' => $this->faker->date('Y-m-d'),
-            'tgl_keluar' => $this->faker->optional()->date('Y-m-d'),
-            'status_klrga' => $this->faker->randomElement(['Anak Kandung', 'Anak Angkat', 'Keponakan']),
-            'anak_ke' => $this->faker->numberBetween(1, 5),
-            'alamat' => $this->faker->address,
-            'telp_rumah' => $this->faker->optional()->phoneNumber,
-            'status_pip' => $this->faker->randomElement(['Ya', 'Tidak']),
+            'nama' => fake()->name,
+            'nisn' => fake()->unique()->numerify('##########'),
+            'ttl' => fake()->date('Y-m-d') . ' di ' . fake()->city,
+            'jenis_kelamin' => fake()->randomElement(['L', 'P']),
+            'agama' => fake()->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']),
+            'sklh_asal' => fake()->company . ' School',
+            'tgl_masuk' => fake()->date('Y-m-d'),
+            'tgl_keluar' => fake()->optional()->date('Y-m-d'),
+            'status_klrga' => fake()->randomElement(['Anak Kandung', 'Anak Angkat', 'Keponakan']),
+            'anak_ke' => fake()->numberBetween(1, 5),
+            'alamat' => fake()->address,
+            'telp_rumah' => fake()->optional()->phoneNumber,
+            'status_pip' => fake()->randomElement(['Ya', 'Tidak']),
 
             // Data ortu
-            'nama_ortu' => $this->faker->optional()->name,
-            'alamat_ortu' => $this->faker->optional()->address,
-            'no_telp' => $this->faker->optional()->phoneNumber,
-            'pekerjaan' => $this->faker->optional()->jobTitle,
+            'nama_ortu' => fake()->optional()->name,
+            'alamat_ortu' => fake()->optional()->address,
+            'no_telp' => fake()->optional()->phoneNumber,
+            'pekerjaan' => fake()->optional()->jobTitle,
 
             // Data wali
-            'nama_wali' => $this->faker->optional()->name,
-            'alamat_wali' => $this->faker->optional()->address,
-            'pekerjaan_wali' => $this->faker->optional()->jobTitle,
+            'nama_wali' => fake()->optional()->name,
+            'alamat_wali' => fake()->optional()->address,
+            'pekerjaan_wali' => fake()->optional()->jobTitle,
         ];
     }
 }

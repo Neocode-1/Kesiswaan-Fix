@@ -16,10 +16,16 @@ class Absensi extends Model
     protected $fillable = [
         'rekan_bulanan',
         'upload_file',
+        'admin_id',
+        'klasifikasi_id',
     ];
-
-    public function siswa(): BelongsTo
+    public function admin(): BelongsTo
     {
-        return $this->belongsTo(Siswa::class);
+        return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    public function klasifikasi(): BelongsTo
+    {
+        return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
     }
 }

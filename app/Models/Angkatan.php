@@ -15,6 +15,7 @@ class Angkatan extends Model
 
     protected $fillable = [
         'tahun',
+        'siswa_id'
     ];
 
 

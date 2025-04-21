@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->boolean('is_aktif')->default(true);
             $table->string('role')->default('admin');
+            $table->unsignedBigInteger('siswa_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

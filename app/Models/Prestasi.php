@@ -18,12 +18,13 @@ class Prestasi extends Model
         'nama',
         'nama_prestasi',
         'tingkat',
-        'foto_up',
+        'foto_upload',
         'tahun',
+        'siswa_id'
     ];
 
     public function siswa(): BelongsTo
     {
-        return $this->belongsTo(Siswa::class);
+        return $this->belongsTo(Siswa::class, 'siswa_id');
     }
 }
