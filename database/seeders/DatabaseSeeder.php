@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
             $data->update([
                 'admin_id' => User::all()->random()->id,
                 'klasifikasi_id' => Klasifikasi::all()->random()->id,
+                'kelas_id' => Kelas::all()->random()->id,
             ]);
         }
 
