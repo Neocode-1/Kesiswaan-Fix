@@ -83,16 +83,16 @@ class SiswaResource extends Resource
                                         ->grouped()
                                         ->required()
                                         ->options([
-                                            'Laki-Laki' => 'Laki-laki',
+                                            'Laki-laki' => 'Laki-laki',
                                             'Perempuan' => 'Perempuan',
                                         ])
                                         ->icons([
-                                            'Laki-Laki' => 'heroicon-o-user',
+                                            'Laki-laki' => 'heroicon-o-user',
                                             'Perempuan' => 'heroicon-o-user-circle',
                                         ])
 
                                         ->colors([
-                                            'Laki-Laki' => 'sky',
+                                            'Laki-laki' => 'sky',
                                             'Perempuan' => 'pink',
                                         ]),
                                     ToggleButtons::make('status_pip')
@@ -115,8 +115,9 @@ class SiswaResource extends Resource
                                         ]),
                                     Select::make('agama')
                                         ->label('Agama Siswa')
-                                        ->prefixIcon('heroicon-o-building-library')
+                                        ->prefixIcon('heroicon-o-information-circle')
                                         ->prefixIconColor('primary')
+                                        ->placeholder('Silahkan pilih yang sesuai')
                                         ->required()
                                         ->options([
                                             'Islam',
@@ -136,7 +137,7 @@ class SiswaResource extends Resource
                                     TextInput::make('sekolah_asal')
                                         ->label('Asal Sekolah')
                                         ->placeholder('Silahkan isi asal sekolah sebelumnya')
-                                        ->prefixIcon('heroicon-o-building-office-2')
+                                        ->prefixIcon('heroicon-o-building-library')
                                         ->prefixIconColor('primary')
                                         ->required(),
                                     DatePicker::make('tgl_masuk')
@@ -169,9 +170,26 @@ class SiswaResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nama'),
-                TextColumn::make('nisn'),
-                TextColumn::make('jenis_kelamin'),
+                TextColumn::make('nama')
+                    ->searchable()
+                    ->icon('heroicon-o-user')
+                    ->iconColor('primary')
+                    ->description(fn(Siswa $record): string => "" . $record->nisn)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query->orderBy('nisn', $direction);
+                    }),
+                TextColumn::make('jenis_kelamin')
+                    ->searchable()
+                    ->label('Jenis Kelamin')
+                    ->icon('heroicon-o-user-circle')
+                    ->color(function ($record) {
+                        $jenis_kelamin = $record->jenis_kelamin;
+                        if ($jenis_kelamin == 'Laki-laki') {
+                            return 'sky';
+                        } else {
+                            return 'pink';
+                        }
+                    }),
                 TextColumn::make('agama'),
                 TextColumn::make('status_pip')
                     ->searchable()
