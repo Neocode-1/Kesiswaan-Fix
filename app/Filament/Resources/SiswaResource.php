@@ -4,18 +4,22 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\Kelas;
 use App\Models\Siswa;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ColorColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\ToggleButtons;
 use App\Filament\Resources\SiswaResource\Pages;
@@ -161,6 +165,29 @@ class SiswaResource extends Resource
                                         ->label('Alamat Lengkap Siswa')
                                         ->required(),
                                 ])
+                        ]),
+                    Wizard\Step::make('Data Ortu Santri')
+                        ->icon('heroicon-o-clipboard-document-list')
+                        ->completedIcon('heroicon-m-clipboard-document-check')
+                        ->schema([
+                            Grid::make()
+                                ->relationship('family')
+                                ->schema([
+                                    Section::make()
+                                        ->description("Data Keluarga Siswa")
+                                        ->schema([
+                                            TextInput::make('status_keluarga')
+                                                ->label('Status Keluarga')
+                                                ->placeholder('Silahkan isi status keluarga')
+                                                ->prefixIcon('heroicon-o-identification')
+                                                ->prefixIconColor('primary'),
+                                            TextInput::make('anak_ke')
+                                                ->label('Anak Ke-')
+                                                ->placeholder('Silahkan isi data anak ke-')
+                                                ->prefixIcon('heroicon-o-identification')
+                                                ->prefixIconColor('primary'),
+                                        ]),
+                                ])
                         ])
                 ])
             ]);
@@ -211,10 +238,32 @@ class SiswaResource extends Resource
                         }
                     })
                     ->badge(),
-                TextColumn::make('alamat'),
+                TextColumn::make('kelas.kebutuhan')
+                    ->iconColor('primary')
+                    ->icon('heroicon-o-academic-cap')
+                    ->description(fn(Siswa $record): string => "" . $record->tingkat)
+                    ->searchable(
+                        query: function (Builder $query, string $search): Builder {
+                            $id = Kelas::where('kebutuhan', 'like', '%' . $search . '%')->first()->id ?? null;
+                            if ($id) {
+                                return $query->where('kelas_id', 'like', '%' . $id . '%');
+                            }
+                            return $query;
+                        }
+                    ),
+                TextColumn::make('alamat')
+                    ->wrap(),
             ])
             ->filters([
-                //
+                // SelectFilter::make('kelas.kebutuhan')
+                //     ->label("Kelas")
+                //     ->options([
+                //         'Tunarungu' => 'Tunarungu',
+                //         'Tunagrahita' => 'Tunagrahita',
+                //         'Tunawicara' => 'Tunawicara',
+                //         'Tunadaksa' =>'Tunadaksa',
+                //         'Autis' => 'Autis',
+                //     ]),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
