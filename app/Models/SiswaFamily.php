@@ -32,7 +32,7 @@ class SiswaFamily extends Model
         'siswa_id',
     ];
 
-    public function admin(): BelongsTo
+    public function siswa(): BelongsTo
     {
         return $this->belongsTo(Siswa::class, 'siswa_id');
     }
