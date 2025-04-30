@@ -268,7 +268,7 @@ class SiswaResource extends Resource
                                             ->prefixIcon('heroicon-o-briefcase')
                                             ->prefixIconColor('primary'),
                                             Textarea::make('alamat_wali')
-                                            ->label('Pekerjaan Wali')
+                                            ->label('Alamat Wali')
                                             ->placeholder('Silahkan diisi')
                                     ])
                                 ])
