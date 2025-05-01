@@ -13,11 +13,13 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ColorColumn;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -176,16 +178,16 @@ class SiswaResource extends Resource
                                         ->description("Data Keluarga Siswa")
                                         ->schema([
                                             Select::make('status_keluarga')
-                                        ->label('Status Keluarga Siswa')
-                                        ->prefixIcon('heroicon-o-information-circle')
-                                        ->prefixIconColor('primary')
-                                        ->placeholder('Silahkan pilih yang sesuai')
-                                        ->required()
-                                        ->options([
-                                            'Kandung',
-                                            'Tiri',
-                                            'Angkat',
-                                        ]),
+                                                ->label('Status Keluarga Siswa')
+                                                ->prefixIcon('heroicon-o-information-circle')
+                                                ->prefixIconColor('primary')
+                                                ->placeholder('Silahkan pilih yang sesuai')
+                                                ->required()
+                                                ->options([
+                                                    'Kandung',
+                                                    'Tiri',
+                                                    'Angkat',
+                                                ]),
                                             TextInput::make('anak_ke')
                                                 ->label('Anak Ke-')
                                                 ->placeholder('Silahkan isi data anak ke-')
@@ -201,76 +203,117 @@ class SiswaResource extends Resource
                                                 ->numeric()
                                                 ->required(),
                                             Textarea::make('alamat_ortu')
-                                            ->label('Alamat Orang Tua')
-                                            ->placeholder('Silahkan diisi')
-                                            ->required(),
+                                                ->label('Alamat Orang Tua')
+                                                ->placeholder('Silahkan diisi')
+                                                ->required(),
                                         ]),
-                                        Section::make()
+                                    Section::make()
                                         ->description('Biodata Ayah')
                                         ->schema([
                                             TextInput::make('nama_ayah')
-                                            ->label('Nama Ayah')
-                                            ->placeholder('Silahkan diisi')
-                                            ->prefixIcon('heroicon-o-user')
-                                            ->prefixIconColor('primary')
-                                            ->required(),
+                                                ->label('Nama Ayah')
+                                                ->placeholder('Silahkan diisi')
+                                                ->prefixIcon('heroicon-o-user')
+                                                ->prefixIconColor('primary')
+                                                ->required(),
                                             TextInput::make('no_telp_ayah')
-                                            ->label('Nomor Telpon Ayah')
-                                            ->placeholder('Silahkan diisi')
-                                            ->prefixIcon('heroicon-o-phone')
-                                            ->prefixIconColor('primary')
-                                            ->required(),
+                                                ->label('Nomor Telpon Ayah')
+                                                ->placeholder('Silahkan diisi')
+                                                ->prefixIcon('heroicon-o-phone')
+                                                ->prefixIconColor('primary')
+                                                ->required(),
                                             TextInput::make('pekerjaan_ayah')
-                                            ->label('Pekerjaan Ayah')
-                                            ->placeholder('Silahkan diisi')
-                                            ->prefixIcon('heroicon-o-briefcase')
-                                            ->prefixIconColor('primary')
-                                            ->required(),
+                                                ->label('Pekerjaan Ayah')
+                                                ->placeholder('Silahkan diisi')
+                                                ->prefixIcon('heroicon-o-briefcase')
+                                                ->prefixIconColor('primary')
+                                                ->required(),
                                         ]),
-                                        Section::make()
+                                    Section::make()
                                         ->description('Biodata Ibu')
                                         ->schema([
                                             TextInput::make('nama_ibu')
-                                            ->label('Nama Ibu')
-                                            ->placeholder('Silahkan diisi')
-                                            ->prefixIcon('heroicon-o-user')
-                                            ->prefixIconColor('primary')
-                                            ->required(),
+                                                ->label('Nama Ibu')
+                                                ->placeholder('Silahkan diisi')
+                                                ->prefixIcon('heroicon-o-user')
+                                                ->prefixIconColor('primary')
+                                                ->required(),
                                             TextInput::make('no_telp_ibu')
-                                            ->label('Nomor Telpon Ibu')
-                                            ->placeholder('Silahkan diisi')
-                                            ->prefixIcon('heroicon-o-phone')
-                                            ->prefixIconColor('primary')
-                                            ->required(),
+                                                ->label('Nomor Telpon Ibu')
+                                                ->placeholder('Silahkan diisi')
+                                                ->prefixIcon('heroicon-o-phone')
+                                                ->prefixIconColor('primary')
+                                                ->required(),
                                             TextInput::make('pekerjaan_ibu')
-                                            ->label('Pekerjaan Ibu')
-                                            ->placeholder('Silahkan diisi')
-                                            ->prefixIcon('heroicon-o-briefcase')
-                                            ->prefixIconColor('primary')
-                                            ->required(),
+                                                ->label('Pekerjaan Ibu')
+                                                ->placeholder('Silahkan diisi')
+                                                ->prefixIcon('heroicon-o-briefcase')
+                                                ->prefixIconColor('primary')
+                                                ->required(),
                                         ]),
                                     Section::make()
-                                    ->description('Biodata Wali')
-                                    ->schema([
-                                        TextInput::make('nama_wali')
-                                            ->label('Nama Wali')
-                                            ->placeholder('Silahkan diisi')
-                                            ->prefixIcon('heroicon-o-user')
-                                            ->prefixIconColor('primary'),
+                                        ->description('Biodata Wali')
+                                        ->schema([
+                                            TextInput::make('nama_wali')
+                                                ->label('Nama Wali')
+                                                ->placeholder('Silahkan diisi')
+                                                ->prefixIcon('heroicon-o-user')
+                                                ->prefixIconColor('primary'),
                                             TextInput::make('no_telp_wali')
-                                            ->label('Nomor Telpon Wali')
-                                            ->placeholder('Silahkan diisi')
-                                            ->prefixIcon('heroicon-o-phone')
-                                            ->prefixIconColor('primary'),
+                                                ->label('Nomor Telpon Wali')
+                                                ->placeholder('Silahkan diisi')
+                                                ->prefixIcon('heroicon-o-phone')
+                                                ->prefixIconColor('primary'),
                                             TextInput::make('pekerjaan_wali')
-                                            ->label('Pekerjaan Wali')
-                                            ->placeholder('Silahkan diisi')
-                                            ->prefixIcon('heroicon-o-briefcase')
-                                            ->prefixIconColor('primary'),
+                                                ->label('Pekerjaan Wali')
+                                                ->placeholder('Silahkan diisi')
+                                                ->prefixIcon('heroicon-o-briefcase')
+                                                ->prefixIconColor('primary'),
                                             Textarea::make('alamat_wali')
-                                            ->label('Alamat Wali')
-                                            ->placeholder('Silahkan diisi')
-                                    ])
+                                                ->label('Alamat Wali')
+                                                ->placeholder('Silahkan diisi')
+                                        ])
+                                ])
+                        ]),
+                    Wizard\Step::make('Data Prestasi Santri')
+                        ->icon('heroicon-o-clipboard-document-list')
+                        ->completedIcon('heroicon-m-clipboard-document-check')
+                        ->schema([
+                            Repeater::make('prestasis')
+                                ->relationship()
+                                ->label('Data Prestasi')
+                                ->schema([
+                                    TextInput::make('nama_prestasi')
+                                        ->label('Nama Prestasi/Kompetisi/Lomba')
+                                        ->prefixIcon('heroicon-o-trophy')
+                                        ->prefixIconColor('primary'),
+                                    TextInput::make('nama')
+                                        ->label('Nama Prestasi/Kompetisi/Lomba')
+                                        ->prefixIcon('heroicon-o-building-library')
+                                        ->prefixIconColor('primary'),
+                                    Select::make('tingkat')
+                                        ->label('Tingkat Perlombaan')
+                                        ->prefixIcon('heroicon-o-chart-bar')
+                                        ->prefixIconColor('primary')
+                                        ->placeholder('Silahkan pilih yang sesuai')
+                                        ->required()
+                                        ->options([
+                                            'Sekolah',
+                                            'Kelurahan',
+                                            'Kecamatan',
+                                            'Kabupaten',
+                                            'Provinsi',
+                                            'Nasional',
+                                            'Internasional',
+                                        ]),
+                                    FileUpload::make('foto_upload')
+                                        ->label('Upload Dokumentasi'),
+                                    TextInput::make('tahun')
+                                        ->label('Tahun Prestasi')
+                                        ->prefixIcon('heroicon-o-chart-bar')
+                                        ->prefixIconColor('primary')
+                                        ->placeholder('Silahkan pilih yang sesuai')
+
                                 ])
                         ])
                 ])
