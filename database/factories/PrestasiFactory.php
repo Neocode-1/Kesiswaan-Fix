@@ -27,7 +27,7 @@ class PrestasiFactory extends Factory
                 'Lomba Pidato',
                 'Lomba Desain Poster'
             ]),
-            'tingkat' => fake()->randomElement(['Sekolah', 'Kecamatan', 'Kabupaten', 'Provinsi', 'Nasional']),
+            'tingkat' => fake()->randomElement(['Sekolah', 'Kecamatan', 'Kabupaten', 'Provinsi', 'Nasional', 'Internasional']),
             'foto_upload' => $url,
             'tahun' => fake()->year(),
         ];

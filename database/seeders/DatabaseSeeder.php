@@ -11,7 +11,6 @@ use App\Models\Absensi;
 use App\Models\Prestasi;
 use App\Models\Klasifikasi;
 use App\Models\SiswaFamily;
-use App\Models\Siswa_family;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -52,9 +51,10 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        foreach ($dataFamily as $data) {
-            $data->update([
-                'siswa_id' => Siswa::all()->random()->id,
+        foreach ($dataFamily as $index => $family) {
+            $siswa = $dataSiswa[$index]; // ambil siswa ke-n
+            $family->update([
+                'siswa_id' => $siswa->id,
             ]);
         }
 
@@ -62,15 +62,24 @@ class DatabaseSeeder extends Seeder
             $data->update([
                 'admin_id' => User::all()->random()->id,
                 'klasifikasi_id' => Klasifikasi::all()->random()->id,
-                'siswa_id' => Siswa::all()->random()->id,
             ]);
         }
-
+        foreach ($dataRaport as $index => $raport) {
+            $siswa = $dataSiswa[$index]; // ambil siswa ke-n
+            $raport->update([
+                'siswa_id' => $siswa->id,
+            ]);
+        }
         foreach ($dataIjazah as $data) {
             $data->update([
                 'admin_id' => User::all()->random()->id,
                 'klasifikasi_id' => Klasifikasi::all()->random()->id,
-                'siswa_id' => Siswa::all()->random()->id,
+            ]);
+        }
+        foreach ($dataIjazah as $index => $ijazah) {
+            $siswa = $dataSiswa[$index]; // ambil siswa ke-n
+            $ijazah->update([
+                'siswa_id' => $siswa->id,
             ]);
         }
         foreach ($dataAbsensi as $data) {
@@ -85,10 +94,17 @@ class DatabaseSeeder extends Seeder
                 'absensi_id' => Absensi::all()->random()->id,
             ]);
         }
+
         foreach ($dataPrestasi as $data) {
             $data->update([
                 'siswa_id' => Siswa::all()->random()->id,
             ]);
         }
+        // foreach ($dataPrestasi as $index => $prestasi) {
+        //     $siswa = $dataSiswa[$index]; // ambil siswa ke-n
+        //     $prestasi->update([
+        //         'siswa_id' => $siswa->id,
+        //     ]);
+        // }
     }
 }

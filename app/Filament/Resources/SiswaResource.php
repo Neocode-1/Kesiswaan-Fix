@@ -126,12 +126,12 @@ class SiswaResource extends Resource
                                         ->placeholder('Silahkan pilih yang sesuai')
                                         ->required()
                                         ->options([
-                                            'Islam',
-                                            'Kristen',
-                                            'Katholik',
-                                            'Hindu',
-                                            'Budha',
-                                            'Konghucu'
+                                            'Islam' => 'Islam',
+                                            'Kristen' => 'Kristen',
+                                            'Katholik' => 'Katholik',
+                                            'Hindu' => 'Hindu',
+                                            'Budha' => 'Budha',
+                                            'Konghucu' => 'Konghucu',
                                         ]),
                                     TextInput::make('telp_rumah')
                                         ->label('Nomor Telepon Rumah')
@@ -184,9 +184,9 @@ class SiswaResource extends Resource
                                                 ->placeholder('Silahkan pilih yang sesuai')
                                                 ->required()
                                                 ->options([
-                                                    'Kandung',
-                                                    'Tiri',
-                                                    'Angkat',
+                                                    'Kandung' => 'Kandung',
+                                                    'Tiri' => 'Tiri',
+                                                    'Angkat' => 'Angkat',
                                                 ]),
                                             TextInput::make('anak_ke')
                                                 ->label('Anak Ke-')
@@ -283,13 +283,13 @@ class SiswaResource extends Resource
                                 ->relationship()
                                 ->label('Data Prestasi')
                                 ->schema([
+                                    TextInput::make('nama')
+                                        ->label('Nama Siswa')
+                                        ->prefixIcon('heroicon-o-user')
+                                        ->prefixIconColor('primary'),
                                     TextInput::make('nama_prestasi')
                                         ->label('Nama Prestasi/Kompetisi/Lomba')
                                         ->prefixIcon('heroicon-o-trophy')
-                                        ->prefixIconColor('primary'),
-                                    TextInput::make('nama')
-                                        ->label('Nama Prestasi/Kompetisi/Lomba')
-                                        ->prefixIcon('heroicon-o-building-library')
                                         ->prefixIconColor('primary'),
                                     Select::make('tingkat')
                                         ->label('Tingkat Perlombaan')
@@ -298,13 +298,13 @@ class SiswaResource extends Resource
                                         ->placeholder('Silahkan pilih yang sesuai')
                                         ->required()
                                         ->options([
-                                            'Sekolah',
-                                            'Kelurahan',
-                                            'Kecamatan',
-                                            'Kabupaten',
-                                            'Provinsi',
-                                            'Nasional',
-                                            'Internasional',
+                                            'Sekolah' => 'Sekolah',
+                                            'Kelurahan' => 'Kelurahan',
+                                            'Kecamatan' => 'Kecamatan',
+                                            'Kabupaten' => 'Kabupaten',
+                                            'Provinsi' => 'Provinsi',
+                                            'Nasional' => 'Nasional',
+                                            'Internasional' => 'Internasional',
                                         ]),
                                     FileUpload::make('foto_upload')
                                         ->label('Upload Dokumentasi'),

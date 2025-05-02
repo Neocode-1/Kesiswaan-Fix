@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +20,7 @@ class SiswaFactory extends Factory
 
         return [
             'nama' => fake()->name(),
-            'nisn' => Str::random(20),
+            'nisn' => fake()->numerify('##########'),
             'tmpt_lahir' => fake()->city(),
             'tgl_lahir' => fake()->date(),
             'jenis_kelamin' => fake()->randomElement(['Laki-laki', 'Perempuan']),

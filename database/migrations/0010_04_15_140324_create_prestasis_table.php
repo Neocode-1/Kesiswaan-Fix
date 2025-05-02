@@ -14,11 +14,11 @@ return new class extends Migration
     {
         Schema::create('prestasis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('nama_prestasi');
-            $table->string('tingkat');
-            $table->string('foto_upload');
-            $table->year('tahun');
+            $table->string('nama')->nullable();
+            $table->string('nama_prestasi')->nullable();
+            $table->string('tingkat')->nullable();
+            $table->string('foto_upload')->nullable();
+            $table->year('tahun')->nullable();
             $table->unsignedBigInteger('siswa_id')->nullable();
             $table->timestamps();
         });
