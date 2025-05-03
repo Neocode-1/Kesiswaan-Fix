@@ -325,7 +325,7 @@ class SiswaResource extends Resource
                 TextColumn::make('kelas.kebutuhan')
                     ->iconColor('primary')
                     ->icon('heroicon-o-academic-cap')
-                    ->description(fn(Siswa $record): string => "" . $record->tingkat)
+                    ->description(fn(Siswa  $record): string => "" . $record->tingkat)
                     ->searchable(
                         query: function (Builder $query, string $search): Builder {
                             $id = Kelas::where('kebutuhan', 'like', '%' . $search . '%')->first()->id ?? null;
