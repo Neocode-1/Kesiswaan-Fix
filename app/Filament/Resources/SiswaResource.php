@@ -27,6 +27,7 @@ use Filament\Forms\Components\ToggleButtons;
 use App\Filament\Resources\SiswaResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SiswaResource\RelationManagers;
+use App\Models\Klasifikasi;
 
 class SiswaResource extends Resource
 {
@@ -53,9 +54,7 @@ class SiswaResource extends Resource
                                         ->prefixIcon('heroicon-o-user')
                                         ->prefixIconColor('primary')
                                         ->required()
-                                        ->rule('regex:/^[a-zA-Z\s]+$/')
                                         ->validationMessages([
-                                            'regex' => 'Nama hanya boleh berisi huruf dan spasi saja, bro!',
                                             'required' => 'Namanya kosong nih tolong isi ya'
                                         ]),
                                     TextInput::make('nisn')
@@ -279,14 +278,10 @@ class SiswaResource extends Resource
                         ->icon('heroicon-o-clipboard-document-list')
                         ->completedIcon('heroicon-m-clipboard-document-check')
                         ->schema([
-                            Repeater::make('prestasis')
-                                ->relationship()
+                            Repeater::make('siswa_id')
+                                ->relationship('prestasis')
                                 ->label('Data Prestasi')
                                 ->schema([
-                                    TextInput::make('nama')
-                                        ->label('Nama Siswa')
-                                        ->prefixIcon('heroicon-o-user')
-                                        ->prefixIconColor('primary'),
                                     TextInput::make('nama_prestasi')
                                         ->label('Nama Prestasi/Kompetisi/Lomba')
                                         ->prefixIcon('heroicon-o-trophy')
@@ -306,7 +301,7 @@ class SiswaResource extends Resource
                                             'Nasional' => 'Nasional',
                                             'Internasional' => 'Internasional',
                                         ]),
-                                    FileUpload::make('foto_upload')
+                                    FileUpload::make('siswa_id')
                                         ->label('Upload Dokumentasi'),
                                     TextInput::make('tahun')
                                         ->label('Tahun Prestasi')
@@ -371,6 +366,18 @@ class SiswaResource extends Resource
                     ->description(fn(Siswa $record): string => "" . $record->tingkat)
                     ->searchable(
                         query: function (Builder $query, string $search): Builder {
+                            $id = Klasifikasi::where('tahun_masuk', 'like', '%' . $search . '%')->first()->id ?? null;
+                            if ($id) {
+                                return $query->where('klasifikasi_id', 'like', '%' . $id . '%');
+                            }
+                            return $query;
+                        }
+                    ),
+                TextColumn::make('klasifikasi.tahun_masuk')
+                    ->iconColor('primary')
+                    ->icon('heroicon-o-calendar')
+                    ->searchable(
+                        query: function (Builder $query, string $search): Builder {
                             $id = Kelas::where('kebutuhan', 'like', '%' . $search . '%')->first()->id ?? null;
                             if ($id) {
                                 return $query->where('kelas_id', 'like', '%' . $id . '%');
@@ -379,18 +386,44 @@ class SiswaResource extends Resource
                         }
                     ),
                 TextColumn::make('alamat')
-                    ->wrap(),
+                    ->label('Alamat')
+                    ->iconColor('primary')
+                    ->icon('heroicon-o-map-pin'),
             ])
             ->filters([
-                // SelectFilter::make('kelas.kebutuhan')
-                //     ->label("Kelas")
-                //     ->options([
-                //         'Tunarungu' => 'Tunarungu',
-                //         'Tunagrahita' => 'Tunagrahita',
-                //         'Tunawicara' => 'Tunawicara',
-                //         'Tunadaksa' =>'Tunadaksa',
-                //         'Autis' => 'Autis',
-                //     ]),
+                SelectFilter::make('jenis_kelamin')
+                    ->label("Jenis Kelamin")
+                    ->options([
+                        'Laki-laki' => 'Laki-laki',
+                        'Perempuan' => 'Perempuan'
+                    ]),
+                SelectFilter::make('agama')
+                    ->label("Agama")
+                    ->options([
+                        'Islam' => 'Islam',
+                        'Kristen' => 'Kristen',
+                        'Katholik' => 'Katholik',
+                        'Hindu' => 'Hindu',
+                        'Budha' => 'Budha',
+                        'Konghucu' => 'Konghucu',
+                    ]),
+                SelectFilter::make('status_pip')
+                    ->label("Status PIP")
+                    ->options([
+                        'Sudah' => 'Sudah',
+                        'Belum' => 'Belum'
+                    ]),
+
+                SelectFilter::make('kelas')
+                    ->relationship('kelas', 'kebutuhan')
+                    ->options([
+                        'Tunarungu' => 'Tunarungu',
+                        'Tunagrahita' => 'Tunagrahita',
+                        'Tunawicara' => 'Tunawicara',
+                        'Autis' => 'Autis',
+                        'Tunadaksa' => 'Tunadaksa'
+                    ])
+                    ->attribute('kelas_id')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

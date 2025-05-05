@@ -82,10 +82,7 @@ class PrestasiResource extends Resource
                     ->searchable()
                     ->icon('heroicon-o-user')
                     ->iconColor('primary')
-                    ->description(fn(Siswa $record): string => "" . $record->nisn)
-                    ->sortable(query: function (Builder $query, string $direction): Builder {
-                        return $query->orderBy('nisn', $direction);
-                    }),
+                    ,
                 TextColumn::make('nama_prestasi')
                     ->label('Nama Lomba')
                     ->searchable()
