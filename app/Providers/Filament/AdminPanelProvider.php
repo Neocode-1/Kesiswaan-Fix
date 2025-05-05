@@ -27,13 +27,16 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->font('Poppins')
             ->login()
+            ->registration()
+            ->passwordReset()
             ->profile()
             ->colors([
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,
                 'info' => Color::Yellow,
-                'primary' => Color::Yellow,
+                'primary' => Color::Teal,
                 'success' => Color::Green,
                 'warning' => Color::Orange,
                 // Warna tambahan
@@ -95,5 +98,9 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('images/slb1.png'))
             ->brandName('Kesiswaan SLB')
             ->brandLogoHeight('3rem');
+
+            // ->plugins([
+            //     EmailVerificationAlertPlugin::make()
+            // ]);
     }
 }

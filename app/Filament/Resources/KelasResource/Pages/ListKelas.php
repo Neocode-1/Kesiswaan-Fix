@@ -24,10 +24,14 @@ class ListKelas extends ListRecords
     public function getTabs(): array
     {
         return [
-            'x' => Tab::make()->query(fn($query) => $query->where('tingkat', 'X')),
-            'xi' => Tab::make()->query(fn($query) => $query->where('tingkat', 'XI')),
-            'xii' => Tab::make()->query(fn($query) => $query->where('tingkat', 'XII')),
+            'Tunarungu' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'TUNARUNGU')),
+            'Autis' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'AUTIS')),
+            'Tunagrahita' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'TUNAGRAHITA')),
+            'Tunawicara' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'TUNAWICARA')),
+            'Tunadaksa' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'TUNADAKSA')),
             'All' => Tab::make(),
         ];
     }
+
+    
 }

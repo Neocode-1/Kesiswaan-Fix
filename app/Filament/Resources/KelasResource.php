@@ -5,18 +5,24 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\KelasResource\Pages;
 use App\Filament\Resources\KelasResource\RelationManagers;
 use App\Models\Kelas;
+use Filament\Infolists\Infolist;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
+use Filament\Infolists\Components\Section as Sections;
+
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Actions\Action;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\Fieldset;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -29,6 +35,10 @@ class KelasResource extends Resource
 
     protected static ?string $navigationGroup = 'Kelas Siswa';
 
+    protected static ?string $navigationLabel = 'Kelas';
+
+    public static ?string $label = 'Info';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -40,6 +50,7 @@ class KelasResource extends Resource
                         TextInput::make('absensi_id')
                             ->label('Nama Siswa')
                             ->placeholder('Masukan nama siswa')
+                            
                             ->required(),
 
                         Select::make('tingkat')
@@ -83,41 +94,50 @@ class KelasResource extends Resource
             ->columns([
                 TextColumn::make('absensi.admin.name')
                     ->label('Nama Siswa')
-                    ->icon('heroicon-o-pencil-square')
-                    ->iconColor('primary')
+                    ->icon('heroicon-o-user')
+                    ->iconColor('green')
                     ->searchable(),
 
                 TextColumn::make('tingkat')
                     ->label('Tingkatan')
                     ->icon('heroicon-o-arrow-up-tray')
-                    ->iconColor('primary')
+                    ->colors(['lime'])
+                    ->badge()
                     ->searchable(),
 
                 TextColumn::make('nama_kelas')
                     ->label('Nama kelas')
                     ->copyable()
                     ->copyMessage('nama kelas berhasil di salin')
-                    ->icon('heroicon-o-arrow-right-end-on-rectangle')
+                    ->icon('heroicon-o-building-library')
+                    ->Colors(['info'])
                     ->badge()
 
                     ->searchable(),
 
-                TextColumn::make('kebutuhan')
-                    ->label('kebutuhan siswa')
-                    ->icon('heroicon-o-cube-transparent')
-                    ->iconColor('primary')
+                    TextColumn::make('kebutuhan')
+                    ->colors([
+                        'sky' => 'Tunarungu',
+                        'warning' => 'Autis',
+                        'success' => 'Tunadaksa',
+                        'info' => 'Tunawicara',
+                        'blue' => 'Tunagrahirta'
+                    ])
                     ->badge()
-                    ->searchable(),
+                    ->label('Kebutuhan Khusus'),
 
 
             ])
             ->filters([
-                SelectFilter::make('tingkat')
-                    ->label('Tingkat')
+                SelectFilter::make('kebutuhan')
+                    ->label('Kebutuhan Khusus')
                     ->options([
-                        'X' => 'X',
-                        'XI' => 'XI',
-                        'XII' => 'XII'
+                        'Tunarungu' => 'TUNARUNGU',
+                        'Autis' => 'AUTIS',
+                        'Tunagrahirta' => 'TUNAGRAHIRTA',
+                        'Tunawicara' => 'TUNAWICARA',
+                        'Tunadaksa' => 'TUNADAKSA',
+
                     ])
             ])
             ->actions([
@@ -135,11 +155,61 @@ class KelasResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist {
+        return $infolist
+        ->schema([
+            Sections::make('Info Siswa')
+            ->description('The items you have selected for purchase')
+            ->icon('heroicon-m-shopping-bag')
+            ->aside()
+            // ->columns()
+    
+    ->schema([
+        TextEntry::make('absensi.admin.name')
+        ->label('Nama Siswa')
+        ->icon('heroicon-o-user')
+        ->badge()
+        ->colors([
+            'green'
+        ])
+        ->iconColor('primary'),
+
+        TextEntry::make('tingkat')
+        ->label('Tingkat siswa')
+        ->colors(['green'])
+        ->badge()
+        ->icon('heroicon-o-arrow-up-tray'),
+
+        Textentry::make('kebutuhan')
+        ->label('Kebutuhan Khusus')
+        ->colors([
+            'sky' => 'Tunarungu',
+            'warning' => 'Autis',
+            'success' => 'Tunadaksa',
+            'info' => 'Tunawicara',
+            'blue' => 'Tunagrahirta'
+        ])
+        ->badge(),
+
+        TextEntry::make('nama_kelas')
+        ->label('Nama Kelas')
+        ->colors(['green'])
+        ->icon('heroicon-o-building-library')
+        ->badge(),
+        ])
+
+        ]);
+    }
+
     public static function getRelations(): array
     {
         return [
             //
         ];
+    }
+
+    public static function getLabel(): string {
+        return 'Info';
     }
 
     public static function getPages(): array
@@ -148,6 +218,7 @@ class KelasResource extends Resource
             'index' => Pages\ListKelas::route('/'),
             'create' => Pages\CreateKelas::route('/create'),
             'edit' => Pages\EditKelas::route('/{record}/edit'),
+            'view' => Pages\ViewKelas::route('/{record}/view'),
         ];
     }
 
