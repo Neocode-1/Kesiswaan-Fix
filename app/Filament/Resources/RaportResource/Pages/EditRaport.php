@@ -4,6 +4,7 @@ namespace App\Filament\Resources\RaportResource\Pages;
 
 use App\Filament\Resources\RaportResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 
 class EditRaport extends EditRecord
@@ -13,7 +14,13 @@ class EditRaport extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\ViewAction::make()
+            ->label('View Siswa')
+            ->icon('heroicon-o-eye'),
+            Actions\DeleteAction::make()
+            ->label('Delete siswa')
+            ->icon('heroicon-o-trash')
         ];
     }
+
 }

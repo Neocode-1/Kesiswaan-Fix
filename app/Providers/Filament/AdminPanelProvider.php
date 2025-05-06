@@ -18,6 +18,8 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Monzer\FilamentEmailVerificationAlert\EmailVerificationAlertPlugin;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -27,13 +29,14 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->font('Poppins')
             ->login()
             ->profile()
             ->colors([
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,
                 'info' => Color::Yellow,
-                'primary' => Color::Yellow,
+                'primary' => Color::Teal,
                 'success' => Color::Green,
                 'warning' => Color::Orange,
                 // Warna tambahan
@@ -67,7 +70,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -95,5 +98,26 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('images/slb1.png'))
             ->brandName('Kesiswaan SLB')
             ->brandLogoHeight('3rem');
+
+            // ->plugins([
+            //     EmailVerificationAlertPlugin::make()
+            //         ->color('blue')
+            //         ->persistClosedState()
+            //         ->closable(true)
+            //         ->placeholder(true)
+            //         ->renderHookName('panels::body.start')
+            //         // ->renderHookScopes([ListUsers::class])
+            //         ->lazy(false)
+            //         ->verifyUsing(function($user) {
+            //          // Custom verification logic
+            //         //   $user->notify(new );                                             
+    
+            //             // cara dapat notification
+            //         Notification::make()
+            //         ->title(trans('filament-email-verification-alert::messages.verification.success'))
+            //         ->success()
+            //         ->send();
+            //         }),
+            // ]);
     }
 }
