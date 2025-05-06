@@ -414,14 +414,13 @@ class SiswaResource extends Resource
                         'Belum' => 'Belum'
                     ]),
 
-                SelectFilter::make('kelas')
-                    ->relationship('kelas', 'kebutuhan')
+                SelectFilter::make('kelas.kebutuhan')
                     ->options([
                         'Tunarungu' => 'Tunarungu',
                         'Tunagrahita' => 'Tunagrahita',
                         'Tunawicara' => 'Tunawicara',
                         'Autis' => 'Autis',
-                        'Tunadaksa' => 'Tunadaksa'
+                        'Tunanetra' => 'Tunanetra'
                     ])
                     ->attribute('kelas_id')
             ])

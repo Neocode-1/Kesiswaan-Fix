@@ -93,8 +93,8 @@ class AdminPanelProvider extends PanelProvider
             ->maxContentWidth('25rem')
             ->sidebarCollapsibleOnDesktop(true)
             ->sidebarFullyCollapsibleOnDesktop(true)
-            ->brandLogo(asset('images/slb1.png'))
-            ->darkModeBrandLogo(asset('images/slb1.png'))
+            ->brandLogo(asset('images/LogoLight.png'))
+            ->darkModeBrandLogo(asset('images/LogoDark.png'))
             ->favicon(asset('images/slb1.png'))
             ->brandName('Kesiswaan SLB')
             ->brandLogoHeight('3rem');

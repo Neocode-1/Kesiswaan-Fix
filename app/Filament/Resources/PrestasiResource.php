@@ -64,7 +64,8 @@ class PrestasiResource extends Resource
                         'Internasional' => 'Internasional',
                     ]),
                 FileUpload::make('foto_upload')
-                    ->label('Upload Dokumentasi'),
+                    ->label('Upload Dokumentasi')
+                    ->previewable(true),
                 TextInput::make('tahun')
                     ->label('Tahun Prestasi')
                     ->prefixIcon('heroicon-o-chart-bar')

@@ -19,8 +19,7 @@ class KelasFactory extends Factory
         return [
             'nama_kelas' => fake()->randomElement(['A', 'B', 'C', 'D']),
             'tingkat' => fake()->randomElement(['X', 'XI', 'XII']),
-            'kebutuhan' => fake()->randomElement(['Tunarungu', 'Tunagrahita', 'Tunawicara', 'Autis', 'Tunadaksa']),
+            'kebutuhan' => fake()->randomElement(['Tunarungu', 'Tunagrahita', 'Tunawicara', 'Autis', 'Tunanetra']),
         ];
-
     }
 }
