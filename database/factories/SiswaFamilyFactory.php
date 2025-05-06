@@ -19,10 +19,10 @@ class SiswaFamilyFactory extends Factory
         return [
             'status_keluarga' => fake()->randomElement(['Kandung', 'Tiri', 'Angkat']),
             'anak_ke'=> fake()->numberBetween(1, 5),
+            'jml_sdr'=> fake()->numberBetween(1, 10),
             'nama_ayah' => fake()-> name(),
             'nama_ibu' => fake()->name(),
-            'alamat_ayah' => fake()-> address(),
-            'alamat_ibu' => fake()->address(),
+            'alamat_ortu' => fake()-> address(),
             'no_telp_ayah' => fake()->phoneNumber(),
             'no_telp_ibu' => fake()->phoneNumber(),
             'pekerjaan_ayah' => fake()-> jobTitle(),

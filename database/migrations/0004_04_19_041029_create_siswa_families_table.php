@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('status_keluarga')->nullable();
             $table->integer('anak_ke')->nullable();
+            $table->integer('jml_sdr')->nullable();
             $table->string('nama_ayah')->nullable();
             $table->string('nama_ibu')->nullable();
-            $table->text('alamat_ayah')->nullable();
-            $table->text('alamat_ibu')->nullable();
+            $table->text('alamat_ortu')->nullable();
             $table->string('no_telp_ayah', 20)->nullable();
             $table->string('no_telp_ibu', 20)->nullable();
             $table->string('pekerjaan_ayah')->nullable();

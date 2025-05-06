@@ -17,10 +17,10 @@ class SiswaFamily extends Model
     protected $fillable = [
         'status_keluarga',
         'anak_ke',
+        'jml_sdr',
         'nama_ayah',
         'nama_ibu',
-        'alamat_ayah',
-        'alamat_ibu',
+        'alamat_ortu',
         'no_telp_ayah',
         'no_telp_ibu',
         'pekerjaan_ayah',
@@ -32,7 +32,7 @@ class SiswaFamily extends Model
         'siswa_id',
     ];
 
-    public function admin(): BelongsTo
+    public function siswa(): BelongsTo
     {
         return $this->belongsTo(Siswa::class, 'siswa_id');
     }

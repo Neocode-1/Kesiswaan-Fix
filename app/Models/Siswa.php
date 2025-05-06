@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Siswa extends Model
 {
@@ -31,6 +32,7 @@ class Siswa extends Model
         'status_pip',
         'admin_id',
         'klasifikasi_id',
+        'kelas_id',
     ];
 
     public function admin(): BelongsTo
@@ -41,6 +43,16 @@ class Siswa extends Model
     public function klasifikasi(): BelongsTo
     {
         return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
+    }
+
+    public function kelas(): BelongsTo
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
+
+    public function family(): HasOne
+    {
+        return $this->hasOne(SiswaFamily::class, 'siswa_id');
     }
 
     public function raports(): HasMany
