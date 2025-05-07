@@ -31,8 +31,6 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->font('Poppins')
             ->login()
-            ->registration()
-            ->passwordReset()
             ->profile()
             ->colors([
                 'danger' => Color::Rose,
@@ -101,8 +99,8 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Kesiswaan SLB')
             ->brandLogoHeight('3rem');
 
-            // ->plugins([
-            //     EmailVerificationAlertPlugin::make()
-            // ]);
+        // ->plugins([
+        //     EmailVerificationAlertPlugin::make()
+        // ]);
     }
 }
