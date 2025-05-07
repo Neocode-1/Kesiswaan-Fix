@@ -3,16 +3,10 @@
 namespace App\Filament\Resources\RaportResource\Pages;
 
 use App\Filament\Resources\RaportResource;
-use App\Models\Raport;
 use Filament\Actions;
-use Filament\Notifications\Notification;
-use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\ViewRecord;
 
-class CreateRaport extends CreateRecord
+class ViewRaport extends ViewRecord
 {
     protected static string $resource = RaportResource::class;
-
 }
-
-
-
