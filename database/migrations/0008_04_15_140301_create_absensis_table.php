@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
-            $table->date('rekap_bulanan');
+            $table->string('rekap_bulanan');
             $table->string('upload_file');
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->unsignedBigInteger('klasifikasi_id')->nullable();

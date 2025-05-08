@@ -2,27 +2,28 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\RaportResource\Pages;
-use App\Filament\Resources\RaportResource\RelationManagers;
-use App\Models\Raport;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Wizard;
+use Filament\Tables;
+use App\Models\Raport;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\Section as Sections;
+use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Section;
 use Filament\Support\Enums\FontWeight;
-use Filament\Tables;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\TextEntry;
+use App\Filament\Resources\RaportResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Infolists\Components\Section as Sections;
+use App\Filament\Resources\RaportResource\RelationManagers;
 
 class RaportResource extends Resource
 {
@@ -34,7 +35,7 @@ class RaportResource extends Resource
 
     protected static ?string $label = 'Nilai Siswa';
 
-    protected static ?string $getNavigtionLabel = 'Raport Nilai';
+    protected static ?string $getNavigationLabel = 'Raport Nilai';
 
     protected static ?string $navigationGroup = 'Management Nilai';
 
@@ -51,17 +52,13 @@ class RaportResource extends Resource
                         Section::make()
                         ->description('Masukan Data lengkap siswa')
                         ->schema([
-                            TextInput::make('admin.admin_id')
-                            ->placeholder('Masukan nama lengkap siswa')
+                            Select::make('siswa_id')
                             ->label('Nama Siswa')
+                            ->preload()
                             ->prefixIcon('heroicon-o-user')
                             ->prefixIconColor('primary')
-                            ->required()
-                            ->rule('regex:/^[a-zA-Z\s]+$/')
-                            ->validationMessages([
-                                'regex' => 'Nama hanya boleh berisi huruf dan spasi saja, bro!',
-                                'required' => 'Namanya kosong nih tolong isi ya'
-                            ]),
+                            ->relationship('siswa', 'nama')
+                            ->placeholder('Masukkan Nama Siswa'),
 
                             FileUpload::make('upload_file')
                             ->placeholder('Masukan file nilai')
@@ -70,8 +67,14 @@ class RaportResource extends Resource
 
                             Textarea::make('catatan')
                             ->label('catatan siswa'),
-                            
-                            
+
+                            Select::make('klasifikasi_id')
+                            ->label('Tahun Masuk Siswa')
+                            ->preload()
+                            ->prefixIcon('heroicon-o-user')
+                            ->prefixIconColor('primary')
+                            ->relationship('klasifikasi', 'tahun_masuk')
+                            ->placeholder('Masukkan Tahun Masuk Siswa'),
                         ])
                     ]),
                 ])
@@ -82,15 +85,12 @@ class RaportResource extends Resource
     {
         return $table
             ->columns([
-
-                TextColumn::make('admin.name')
-                ->label('Nama Siswa')
-                // ->size(TextColumn\TextColumnSize::Medium)
-                ->weight(FontWeight::ExtraLight)
-                ->icon('heroicon-o-user')
-                ->searchable()
-                ->iconColor('green'),
-
+                TextColumn::make('siswa.nama')
+                    ->label('Nama Siswa')
+                    ->searchable()
+                    ->icon('heroicon-o-user')
+                    ->iconColor('primary')
+                    ,
                 TextColumn::make('upload_file')
                 ->label('file raport')
                 ->Colors(['info'])
@@ -128,7 +128,7 @@ class RaportResource extends Resource
                 ]),
             ]);
     }
-    
+
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
@@ -138,7 +138,7 @@ class RaportResource extends Resource
     ->description('Hasil rekapan nilai tahunan siswa')
     ->aside()
     ->schema([
-        TextEntry::make('admin.name')
+        TextEntry::make('siswa.nama')
         ->label('Nama Siswa')
         ->iconColor('velvet')
         ->size(TextEntry\TextEntrySize::Medium)
@@ -180,7 +180,7 @@ class RaportResource extends Resource
 
     }
 
-    
+
 
     public static function getRelations(): array
     {

@@ -9,7 +9,6 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -24,7 +23,15 @@ class IjazahResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('klasifikasi_id')
+                    ->relationship('klasifikasi', 'tahun_masuk'),
+                Forms\Components\Select::make('siswa_id')
+                    ->relationship('siswa', 'nama'),
+                Forms\Components\TextInput::make('tahun_lulus')
+                    ->required(),
+                Forms\Components\TextInput::make('upload_file')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -32,8 +39,21 @@ class IjazahResource extends Resource
     {
         return $table
             ->columns([
-                
-                
+                Tables\Columns\TextColumn::make('siswa.nama')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('klasifikasi.tahun_masuk')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('tahun_lulus'),
+                Tables\Columns\TextColumn::make('upload_file')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources\SiswaResource\Pages;
 
+use App\Models\Kelas;
+use App\Models\Siswa;
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use App\Filament\Resources\SiswaResource;
-use App\Models\Siswa;
 use Filament\Resources\Pages\ListRecords;
 
 class ListSiswas extends ListRecords
@@ -25,16 +26,18 @@ class ListSiswas extends ListRecords
 
     public function getTabs(): array
     {
-        return [
-            'All' => Tab::make(),
-            'Islam' => Tab::make()->query(fn($query) => $query->where('agama', 'Islam')),
-            'Kristen' => Tab::make()->query(fn($query) => $query->where('agama', 'Kristen')),
-            'Katholik' => Tab::make()->query(fn($query) => $query->where('agama', 'Katholik')),
-            'Hindu' => Tab::make()->query(fn($query) => $query->where('agama', 'Hinduita')),
-            'Budha' => Tab::make()->query(fn($query) => $query->where('agama', 'Budha')),
-            'Konghucu' => Tab::make()->query(fn($query) => $query->where('agama', 'Konghucu')),
+        $tabs = [
+            'All' => Tab::make(), // default tab semua data
         ];
 
+        foreach (Kelas::all() as $kelas) {
+            $tabs[$kelas->kebutuhan] = Tab::make()
+                ->query(fn ($query) => $query->whereHas('kelas', fn($q) =>
+                    $q->where('kebutuhan', $kelas->kebutuhan)
+                ));
+        }
+
+        return $tabs;
     }
 
 }

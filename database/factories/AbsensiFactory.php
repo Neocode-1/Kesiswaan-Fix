@@ -19,7 +19,20 @@ class AbsensiFactory extends Factory
         $seed = fake()->unique()->uuid;
         $url = "https://picsum.photos/seed/$seed/200/300";
         return [
-            'rekap_bulanan' => fake()->date(),
+            'rekap_bulanan' => fake()->randomElement([
+                'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember',
+            ]),
             'upload_file' => $url,
         ];
     }

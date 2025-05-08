@@ -23,7 +23,27 @@ class AbsensiResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\DatePicker::make('rekap_bulanan')
+                    ->options([
+                        'Januari',
+                        'Februari',
+                        'Maret',
+                        'April',
+                        'Mei',
+                        'Juni',
+                        'Juli',
+                        'Agustus',
+                        'September',
+                        'Oktober',
+                        'November',
+                        'Desember',
+                    ])
+                    ->required(),
+                Forms\Components\TextInput::make('upload_file')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Select::make('klasifikasi_id')
+                    ->relationship('klasifikasi', 'tahun_masuk'),
             ]);
     }
 
@@ -31,7 +51,20 @@ class AbsensiResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('rekap_bulanan')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('upload_file')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('klasifikasi.tahun_masuk')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

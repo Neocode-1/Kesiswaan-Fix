@@ -146,7 +146,7 @@ class SiswaResource extends Resource
                                         ->required(),
                                     DatePicker::make('tgl_masuk')
                                         ->label('Tanggal Masuk Siswa')
-                                        ->placeholder('Masukkan Tanggal Lahir Siswa')
+                                        ->placeholder('Masukkan Tanggal Masuk Siswa')
                                         ->prefixIcon('heroicon-o-calendar-days')
                                         ->prefixIconColor('primary')
                                         ->native(false)
@@ -154,7 +154,7 @@ class SiswaResource extends Resource
                                         ->required(),
                                     DatePicker::make('tgl_keluar')
                                         ->label('Tanggal Keluar Siswa')
-                                        ->placeholder('Masukkan Tanggal Lahir Siswa')
+                                        ->placeholder('Masukkan Tanggal Keluar Siswa')
                                         ->prefixIcon('heroicon-o-calendar-days')
                                         ->prefixIconColor('primary')
                                         ->native(false)
@@ -324,9 +324,7 @@ class SiswaResource extends Resource
                     ->icon('heroicon-o-user')
                     ->iconColor('primary')
                     ->description(fn(Siswa $record): string => "" . $record->nisn)
-                    ->sortable(query: function (Builder $query, string $direction): Builder {
-                        return $query->orderBy('nisn', $direction);
-                    }),
+                    ->sortable(),
                 TextColumn::make('jenis_kelamin')
                     ->searchable()
                     ->label('Jenis Kelamin')
@@ -363,12 +361,12 @@ class SiswaResource extends Resource
                 TextColumn::make('kelas.kebutuhan')
                     ->iconColor('primary')
                     ->icon('heroicon-o-academic-cap')
-                    ->description(fn(Siswa  $record): string => "" . $record->tingkat)
+                    ->description(fn(Siswa $record): string => "" . $record->kelas->tingkat)
                     ->searchable(
                         query: function (Builder $query, string $search): Builder {
-                            $id = Klasifikasi::where('tahun_masuk', 'like', '%' . $search . '%')->first()->id ?? null;
+                            $id = Kelas::where('kebutuhan', 'like', '%' . $search . '%')->first()->id ?? null;
                             if ($id) {
-                                return $query->where('klasifikasi_id', 'like', '%' . $id . '%');
+                                return $query->where('kelas_id', 'like', '%' . $id . '%');
                             }
                             return $query;
                         }
@@ -378,9 +376,9 @@ class SiswaResource extends Resource
                     ->icon('heroicon-o-calendar')
                     ->searchable(
                         query: function (Builder $query, string $search): Builder {
-                            $id = Kelas::where('kebutuhan', 'like', '%' . $search . '%')->first()->id ?? null;
+                            $id = Klasifikasi::where('tahun_masuk', 'like', '%' . $search . '%')->first()->id ?? null;
                             if ($id) {
-                                return $query->where('kelas_id', 'like', '%' . $id . '%');
+                                return $query->where('klasifikasi_id', 'like', '%' . $id . '%');
                             }
                             return $query;
                         }
@@ -441,6 +439,13 @@ class SiswaResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        $siswaData = Siswa::all()->count();
+        $stringCount = strval($siswaData);
+        return $stringCount;
     }
 
     public static function getPages(): array
