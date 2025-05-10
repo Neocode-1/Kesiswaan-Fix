@@ -29,6 +29,7 @@ class RaportResource extends Resource
 {
     protected static ?string $model = Raport::class;
 
+    // protected static ?string $slug = 'raport';
     protected static ?string $navigationIcon = 'heroicon-o-document-arrow-up';
 
     protected static ?string $navigationlabel = 'Nilai Raport';
@@ -38,6 +39,8 @@ class RaportResource extends Resource
     protected static ?string $getNavigationLabel = 'Raport Nilai';
 
     protected static ?string $navigationGroup = 'Management Nilai';
+    // protected static ?string $navigationParentItem = 'Ijazah';
+    protected static ?int $navigationShort = 1;
 
 
     public static function form(Form $form): Form
@@ -46,37 +49,37 @@ class RaportResource extends Resource
             ->schema([
                 Wizard::make([
                     Wizard\Step::make('Data Lengkap')
-                    ->icon('heroicon-o-clipboard-document-list')
-                    ->completedIcon('heroicon-m-clipboard-document-check')
-                    ->schema([
-                        Section::make()
-                        ->description('Masukan Data lengkap siswa')
+                        ->icon('heroicon-o-clipboard-document-list')
+                        ->completedIcon('heroicon-m-clipboard-document-check')
                         ->schema([
-                            Select::make('siswa_id')
-                            ->label('Nama Siswa')
-                            ->preload()
-                            ->prefixIcon('heroicon-o-user')
-                            ->prefixIconColor('primary')
-                            ->relationship('siswa', 'nama')
-                            ->placeholder('Masukkan Nama Siswa'),
+                            Section::make()
+                                ->description('Masukan Data lengkap siswa')
+                                ->schema([
+                                    Select::make('siswa_id')
+                                        ->label('Nama Siswa')
+                                        ->preload()
+                                        ->prefixIcon('heroicon-o-user')
+                                        ->prefixIconColor('primary')
+                                        ->relationship('siswa', 'nama')
+                                        ->placeholder('Masukkan Nama Siswa'),
 
-                            FileUpload::make('upload_file')
-                            ->placeholder('Masukan file nilai')
-                            ->label('file nilai')
-                            ->required(),
+                                    FileUpload::make('upload_file')
+                                        ->placeholder('Masukan file nilai')
+                                        ->label('file nilai')
+                                        ->required(),
 
-                            Textarea::make('catatan')
-                            ->label('catatan siswa'),
+                                    Textarea::make('catatan')
+                                        ->label('catatan siswa'),
 
-                            Select::make('klasifikasi_id')
-                            ->label('Tahun Masuk Siswa')
-                            ->preload()
-                            ->prefixIcon('heroicon-o-user')
-                            ->prefixIconColor('primary')
-                            ->relationship('klasifikasi', 'tahun_masuk')
-                            ->placeholder('Masukkan Tahun Masuk Siswa'),
-                        ])
-                    ]),
+                                    Select::make('klasifikasi_id')
+                                        ->label('Tahun Masuk Siswa')
+                                        ->preload()
+                                        ->prefixIcon('heroicon-o-user')
+                                        ->prefixIconColor('primary')
+                                        ->relationship('klasifikasi', 'tahun_masuk')
+                                        ->placeholder('Masukkan Tahun Masuk Siswa'),
+                                ])
+                        ]),
                 ])
             ]);
     }
@@ -89,21 +92,20 @@ class RaportResource extends Resource
                     ->label('Nama Siswa')
                     ->searchable()
                     ->icon('heroicon-o-user')
-                    ->iconColor('primary')
-                    ,
+                    ->iconColor('primary'),
                 TextColumn::make('upload_file')
-                ->label('file raport')
-                ->Colors(['info'])
-                ->badge()
-                ->searchable()
-                ->Icon('heroicon-o-document-check'),
+                    ->label('file raport')
+                    ->Colors(['info'])
+                    ->badge()
+                    ->searchable()
+                    ->Icon('heroicon-o-document-check'),
 
                 TextColumn::make('klasifikasi.tahun_masuk')
-                ->label('Tahun masuk')
-                ->icon('heroicon-o-calendar-days')
-                ->colors(['info'])
-                ->searchable()
-                ->badge(),
+                    ->label('Tahun masuk')
+                    ->icon('heroicon-o-calendar-days')
+                    ->colors(['info'])
+                    ->searchable()
+                    ->badge(),
 
                 // TextColumn::make('catatan')
                 // ->label('Catatan Siswa')
@@ -132,52 +134,50 @@ class RaportResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
-        ->schema([
-        Sections::make('Data Nilai Siswa')
-        ->icon('heroicon-o-cloud-arrow-up')
-    ->description('Hasil rekapan nilai tahunan siswa')
-    ->aside()
-    ->schema([
-        TextEntry::make('siswa.nama')
-        ->label('Nama Siswa')
-        ->iconColor('velvet')
-        ->size(TextEntry\TextEntrySize::Medium)
-        ->weight(FontWeight::Thin)
-        ->colors(['info'])
-        ->icon('heroicon-o-user'),
+            ->schema([
+                Sections::make('Data Nilai Siswa')
+                    ->icon('heroicon-o-cloud-arrow-up')
+                    ->description('Hasil rekapan nilai tahunan siswa')
+                    ->aside()
+                    ->schema([
+                        TextEntry::make('siswa.nama')
+                            ->label('Nama Siswa')
+                            ->iconColor('velvet')
+                            ->size(TextEntry\TextEntrySize::Medium)
+                            ->weight(FontWeight::Thin)
+                            ->colors(['info'])
+                            ->icon('heroicon-o-user'),
 
-        TextEntry::make('upload_file')
-        ->label('File Nilai')
-        ->size(TextEntry\TextEntrySize::Medium)
-        ->colors(['info'])
-        ->weight(FontWeight::Thin)
-        ->copyable()
-        ->icon('heroicon-o-document-text')
-        ->iconColor('velvet')
-        ->copyMessage('berhasil di copy'),
-        // ->badge()
+                        TextEntry::make('upload_file')
+                            ->label('File Nilai')
+                            ->size(TextEntry\TextEntrySize::Medium)
+                            ->colors(['info'])
+                            ->weight(FontWeight::Thin)
+                            ->copyable()
+                            ->icon('heroicon-o-document-text')
+                            ->iconColor('velvet')
+                            ->copyMessage('berhasil di copy'),
+                        // ->badge()
 
-        TextEntry::make('klasifikasi.tahun_masuk')
-        ->label('Tahun Masuk')
-        ->colors(['info'])
-        ->iconColor('velvet')
-        ->weight(FontWeight::Thin)
-        ->size(TextEntry\TextEntrySize::Medium)
-        ->icon('heroicon-o-calendar'),
+                        TextEntry::make('klasifikasi.tahun_masuk')
+                            ->label('Tahun Masuk')
+                            ->colors(['info'])
+                            ->iconColor('velvet')
+                            ->weight(FontWeight::Thin)
+                            ->size(TextEntry\TextEntrySize::Medium)
+                            ->icon('heroicon-o-calendar'),
 
-        TextEntry::make('catatan')
-        ->label('Catatan')
-        ->icon('heroicon-o-pencil-square')
-        ->weight(Fontweight::Thin)
-        ->size(TextEntry\TextEntrySize::Medium)
-        ->colors(['info'])
-        ->iconColor('velvet'),
+                        TextEntry::make('catatan')
+                            ->label('Catatan')
+                            ->icon('heroicon-o-pencil-square')
+                            ->weight(Fontweight::Thin)
+                            ->size(TextEntry\TextEntrySize::Medium)
+                            ->colors(['info'])
+                            ->iconColor('velvet'),
 
-    ])
+                    ])
 
-        ]);
-
-
+            ]);
     }
 
 
@@ -206,12 +206,14 @@ class RaportResource extends Resource
         ];
     }
 
-    public static function getLabel(): string {
+    public static function getLabel(): string
+    {
         return 'Nilai Raport';
     }
 
 
-    public static function getNavigationBadgeTooltip(): ?string {
+    public static function getNavigationBadgeTooltip(): ?string
+    {
         return 'Total raport';
     }
 }

@@ -7,6 +7,7 @@ use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Enums\ThemeMode;
+use App\Filament\Clusters\Tahun;
 use Filament\Support\Colors\Color;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
@@ -23,6 +24,7 @@ use Monzer\FilamentEmailVerificationAlert\EmailVerificationAlertPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
+    protected static ?string $cluster = Tahun::class;
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -64,6 +66,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->pages([
                 Pages\Dashboard::class,
             ])
@@ -102,5 +105,8 @@ class AdminPanelProvider extends PanelProvider
         // ->plugins([
         //     EmailVerificationAlertPlugin::make()
         // ]);
+
+
+
     }
 }

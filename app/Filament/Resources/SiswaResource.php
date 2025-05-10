@@ -3,11 +3,13 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
+use Filament\Panel;
 use Filament\Tables;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\Klasifikasi;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -27,15 +29,13 @@ use Filament\Forms\Components\ToggleButtons;
 use App\Filament\Resources\SiswaResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SiswaResource\RelationManagers;
-use App\Models\Klasifikasi;
 
 class SiswaResource extends Resource
 {
     protected static ?string $model = Siswa::class;
-
+    protected static ?int $navigationSort = 1;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationLabel = 'Data Siswa';
-
     public static function form(Form $form): Form
     {
         return $form
@@ -447,6 +447,8 @@ class SiswaResource extends Resource
         $stringCount = strval($siswaData);
         return $stringCount;
     }
+    protected static ?string $navigationBadgeTooltip = 'Total Siswa';
+
 
     public static function getPages(): array
     {
@@ -456,4 +458,6 @@ class SiswaResource extends Resource
             'edit' => Pages\EditSiswa::route('/{record}/edit'),
         ];
     }
+
+
 }

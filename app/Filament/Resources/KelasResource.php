@@ -32,9 +32,7 @@ class KelasResource extends Resource
     protected static ?string $model = Kelas::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
-
-    protected static ?string $navigationGroup = 'Kelas Siswa';
-
+    protected static ?int $navigationSort = 2;
     protected static ?string $navigationLabel = 'Kelas';
 
     public static ?string $label = 'Info';
@@ -50,15 +48,24 @@ class KelasResource extends Resource
                         TextInput::make('absensi_id')
                             ->label('Nama Siswa')
                             ->placeholder('Masukan nama siswa')
-                            
+
                             ->required(),
 
-                        Select::make('tingkat')
+                        Select::make('kategori')
                             ->label('Tingkat')
                             ->options([
-                                'x' => 'X',
-                                'xi' => 'XI',
-                                // 'xii' => 'XII'
+                               'SD' => 'SD',
+                               'SMP'=> 'SMP',
+                               'SMA' => 'SMA'
+                            ])
+                            ->native(false)
+                            ->searchable()
+                            ->placeholder('masukan tingkat siswa')
+                            ->required(),
+                        Select::make('tingkat')
+                            ->label('Kelas')
+                            ->options([
+                               1, 2, 3, 4, 5, 6
                             ])
                             ->native(false)
                             ->searchable()
@@ -74,11 +81,22 @@ class KelasResource extends Resource
                             ->label('Nama kelas')
                             ->required()
                             ->options([
-                                'a' => 'A',
-                                'b' => 'B',
-                                'c' => 'C',
-                                'd' => 'D'
+                                'Bag A', 'Bag B', 'Bag C', 'Bag DS', 'Bag D1', 'Autis'
                             ])
+                            ->searchable()
+                            ->placeholder('masukan nama kelas'),
+
+                        Select::make('kebutuhan')
+                            ->label('Nama kelas')
+                            ->required()
+                            ->options([
+                                'Tunarungu' => 'Tunarungu',
+                                'Tunagrahita' => 'Tunagrahita',
+                                'Tunawicara' => 'Tunawicara',
+                                'Tunanetra' => 'Tunanetra',
+                                'Tunadaksa' => 'Tunadaksa',
+                                'Autis' =>  'Autis'
+                                ])
                             ->searchable()
                             ->placeholder('masukan nama kelas')
                     ])
@@ -163,7 +181,7 @@ class KelasResource extends Resource
             ->icon('heroicon-m-shopping-bag')
             ->aside()
             // ->columns()
-    
+
     ->schema([
         TextEntry::make('absensi.admin.name')
         ->label('Nama Siswa')

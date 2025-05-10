@@ -25,7 +25,7 @@ use App\Filament\Resources\PrestasiResource\RelationManagers;
 class PrestasiResource extends Resource
 {
     protected static ?string $model = Prestasi::class;
-
+    protected static ?int $navigationSort = 3;
     protected static ?string $navigationIcon = 'heroicon-o-trophy';
 
     public static function form(Form $form): Form

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class IjazahResource extends Resource
 {
     protected static ?string $model = Ijazah::class;
+    protected static ?string $navigationGroup = 'Management Nilai';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
