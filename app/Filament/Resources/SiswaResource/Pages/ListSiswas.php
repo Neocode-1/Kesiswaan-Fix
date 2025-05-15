@@ -26,18 +26,26 @@ class ListSiswas extends ListRecords
 
     public function getTabs(): array
     {
-        $tabs = [
-            'All' => Tab::make(), // default tab semua data
+        return [
+            'All' => Tab::make(),
+            'Tunanetra' => Tab::make()->query(fn($query) => $query->whereHas('kelas', function ($query) {
+                $query->where('nama_kelas', 'A (Tunanetra)');
+            })),
+            'Tunarungu' => Tab::make()->query(fn($query) => $query->whereHas('kelas', function ($query) {
+                $query->where('nama_kelas', 'B (Tunarungu)');
+            })),
+            'Tunagrahita' => Tab::make()->query(fn($query) => $query->whereHas('kelas', function ($query) {
+                $query->where('nama_kelas', 'C (Tunagrahita)');
+            })),
+            'Down Syndrom' => Tab::make()->query(fn($query) => $query->whereHas('kelas', function ($query) {
+                $query->where('nama_kelas', 'DS (Down Syndrom)');
+            })),
+            'Tunadaksa' => Tab::make()->query(fn($query) => $query->whereHas('kelas', function ($query) {
+                $query->where('nama_kelas', 'D1 (Tunadaksa)');
+            })),
+            'Autis' => Tab::make()->query(fn($query) => $query->whereHas('kelas', function ($query) {
+                $query->where('nama_kelas', 'H/Au (Autis)');
+            })),
         ];
-
-        foreach (Kelas::all() as $kelas) {
-            $tabs[$kelas->kebutuhan] = Tab::make()
-                ->query(fn ($query) => $query->whereHas('kelas', fn($q) =>
-                    $q->where('kebutuhan', $kelas->kebutuhan)
-                ));
-        }
-
-        return $tabs;
     }
-
 }

@@ -7,6 +7,7 @@ use Filament\Panel;
 use Filament\Tables;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\Prestasi;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Models\Klasifikasi;
@@ -292,15 +293,8 @@ class SiswaResource extends Resource
                                         ->prefixIconColor('primary')
                                         ->placeholder('Silahkan pilih yang sesuai')
                                         ->required()
-                                        ->options([
-                                            'Sekolah' => 'Sekolah',
-                                            'Kelurahan' => 'Kelurahan',
-                                            'Kecamatan' => 'Kecamatan',
-                                            'Kabupaten' => 'Kabupaten',
-                                            'Provinsi' => 'Provinsi',
-                                            'Nasional' => 'Nasional',
-                                            'Internasional' => 'Internasional',
-                                        ]),
+                                        ->options(Prestasi::all()->pluck('tingkat', 'id')
+                                            ->unique()),
                                     FileUpload::make('siswa_id')
                                         ->label('Upload Dokumentasi'),
                                     TextInput::make('tahun')
@@ -358,13 +352,15 @@ class SiswaResource extends Resource
                         }
                     })
                     ->badge(),
-                TextColumn::make('kelas.kebutuhan')
+                TextColumn::make('kelas.nama_kelas')
                     ->iconColor('primary')
                     ->icon('heroicon-o-academic-cap')
+                    ->sortable()
+                    ->searchable()
                     ->description(fn(Siswa $record): string => "" . $record->kelas->tingkat)
                     ->searchable(
                         query: function (Builder $query, string $search): Builder {
-                            $id = Kelas::where('kebutuhan', 'like', '%' . $search . '%')->first()->id ?? null;
+                            $id = Kelas::where('nama_kelas', 'like', '%' . $search . '%')->first()->id ?? null;
                             if ($id) {
                                 return $query->where('kelas_id', 'like', '%' . $id . '%');
                             }
@@ -412,15 +408,6 @@ class SiswaResource extends Resource
                         'Belum' => 'Belum'
                     ]),
 
-                SelectFilter::make('kelas.kebutuhan')
-                    ->options([
-                        'Tunarungu' => 'Tunarungu',
-                        'Tunagrahita' => 'Tunagrahita',
-                        'Tunawicara' => 'Tunawicara',
-                        'Autis' => 'Autis',
-                        'Tunanetra' => 'Tunanetra'
-                    ])
-                    ->attribute('kelas_id')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -458,6 +445,4 @@ class SiswaResource extends Resource
             'edit' => Pages\EditSiswa::route('/{record}/edit'),
         ];
     }
-
-
 }

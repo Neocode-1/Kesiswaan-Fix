@@ -24,14 +24,13 @@ class ListKelas extends ListRecords
     public function getTabs(): array
     {
         return [
-            'Tunarungu' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'TUNARUNGU')),
-            'Autis' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'AUTIS')),
-            'Tunagrahita' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'TUNAGRAHITA')),
-            'Tunawicara' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'TUNAWICARA')),
-            'Tunadaksa' => Tab::make()->query(fn($query) => $query->where('kebutuhan', 'TUNADAKSA')),
             'All' => Tab::make(),
-        ];
+            'Tunanetra' => Tab::make()->query(fn($query) => $query->where('nama_kelas', 'A (Tunanetra)')),
+            'Tunarungu' => Tab::make()->query(fn($query) => $query->where('nama_kelas', 'B (Tunarungu)')),
+            'Tunagrahita' => Tab::make()->query(fn($query) => $query->where('nama_kelas', 'C (Tunagrahita)')),
+            'Down Syndrom' => Tab::make()->query(fn($query) => $query->where('nama_kelas', 'DS (Down Syndrom)')),
+            'Tunadaksa' => Tab::make()->query(fn($query) => $query->where('nama_kelas', 'D1 (Tunadaksa)')),
+            'Autis' => Tab::make()->query(fn($query) => $query->where('nama_kelas', 'H/Au (Autis)')),
+        ];  
     }
-
-    
 }

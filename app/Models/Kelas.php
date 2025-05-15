@@ -17,9 +17,7 @@ class Kelas extends Model
 
     protected $fillable = [
         'kategori',
-        'tingkat',
         'nama_kelas',
-        'kebutuhan',
         'absensi_id',
     ];
 

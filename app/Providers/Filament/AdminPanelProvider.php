@@ -92,8 +92,8 @@ class AdminPanelProvider extends PanelProvider
 
             ->defaultThemeMode(ThemeMode::Light)
             ->spa()
-            ->sidebarWidth('15rem')
-            ->maxContentWidth('25rem')
+            ->sidebarWidth('12 rem')
+            ->maxContentWidth('40rem')
             ->sidebarCollapsibleOnDesktop(true)
             ->sidebarFullyCollapsibleOnDesktop(true)
             ->brandLogo(asset('images/LogoLight.png'))

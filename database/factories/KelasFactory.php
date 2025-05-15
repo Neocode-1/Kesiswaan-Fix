@@ -17,10 +17,8 @@ class KelasFactory extends Factory
     public function definition(): array
     {
         return [
-        'kategori' => fake()->randomElement(['SD', 'SMP', 'SMA']),
-        'tingkat' =>fake()->randomElement([1, 2, 3, 4, 5, 6]),
-        'nama_kelas' =>fake()->randomElement(['Bag A', 'Bag B', 'Bag C', 'Bag DS', 'Bag D1', 'Autis']),
-        'kebutuhan' =>fake()->randomElement(['Tunarungu', 'Tunagrahita', 'Tunawicara', 'Tunanetra', 'Tunadaksa', 'Autis']),
+            'kategori' => fake()->randomElement(['1 SD','2 SD', '3 SD', '4 SD', '5 SD', '6 SD', '1 SMP','2 SMP', '3 SMP', '1 SMA','2 SMA', '3 SMA']),
+            'nama_kelas' => fake()->randomElement(['A (Tunanetra)', 'B (Tunarungu)', 'C (Tunagrahita)', 'DS (Down Syndrom)', 'D1 (Tunadaksa)', 'H/Au (Autis)']),
         ];
     }
 }
