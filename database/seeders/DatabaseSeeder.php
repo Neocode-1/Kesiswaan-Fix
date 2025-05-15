@@ -29,12 +29,12 @@ class DatabaseSeeder extends Seeder
         ]);
         $dataUser = User::factory(50)->create();
         $dataKlasifikasi = Klasifikasi::factory(50)->create();
-        $dataSiswa = Siswa::factory(50)->create();
-        $dataFamily = SiswaFamily::factory(50)->create();
-        $dataRaport = Raport::factory(50)->create();
-        $dataIjazah = Ijazah::factory(50)->create();
+        $dataSiswa = Siswa::factory(500)->create();
+        $dataFamily = SiswaFamily::factory(500)->create();
+        $dataRaport = Raport::factory(500)->create();
+        $dataIjazah = Ijazah::factory(500)->create();
         $dataAbsensi = Absensi::factory(50)->create();
-        $dataKelas = Kelas::factory(50)->create();
+        $dataKelas = Kelas::factory(72)->create();
         $dataPrestasi = Prestasi::factory(50)->create();
 
         foreach ($dataKlasifikasi as $data) {

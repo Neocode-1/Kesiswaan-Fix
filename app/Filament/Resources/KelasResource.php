@@ -83,7 +83,7 @@ class KelasResource extends Resource
                             ->label('Nama kelas')
                             ->required()
                             ->options([
-                                'A (Tunanetra)' => 'A  (Tunanetra)',
+                                'A (Tunanetra)' => 'A (Tunanetra)',
                                 'B (Tunarungu)' => 'B (Tunarungu)',
                                 'C (Tunagrahita)' => 'C (Tunagrahita)',
                                 'DS (Down Syndrom)' => 'DS (Down Syndrom)',
@@ -104,12 +104,7 @@ class KelasResource extends Resource
                     ->label('Tingkat')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('tingkat')
-                    ->label('Kelas')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('nama_kelas')
+                    TextColumn::make('nama_kelas')
                     ->label('Nama kelas')
                     ->copyable()
                     ->copyMessage('nama kelas berhasil di salin')
