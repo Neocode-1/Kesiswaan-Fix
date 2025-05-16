@@ -16,8 +16,9 @@ class Kelas extends Model
     protected $table = 'kelas';
 
     protected $fillable = [
-        'kategori',
+        'tingkat',
         'nama_kelas',
+        'disabilitas',
         'absensi_id',
     ];
 
