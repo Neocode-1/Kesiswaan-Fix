@@ -13,7 +13,7 @@
         {
             Schema::create('klasifikasis', function (Blueprint $table) {
                 $table->id();
-                $table->year('tahun_masuk');
+                $table->integer('tahun_masuk');
                 $table->unsignedBigInteger('admin_id')->nullable();
                 $table->timestamps();
             });
