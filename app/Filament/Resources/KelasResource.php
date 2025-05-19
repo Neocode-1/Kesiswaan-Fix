@@ -51,8 +51,8 @@ class KelasResource extends Resource
                             ->label('Daftar Siswa')
                             ->schema([
                                 Select::make('siswa_id')
-                                    ->label('Nama Siswa')
-                                    ->options(Siswa::all()->pluck('nama', 'id')->unique())
+                                    ->label('no Siswa')
+                                    ->options(Siswa::all()->pluck('no', 'id')->unique())
                                     ->searchable()
                                     ->prefixIcon('heroicon-o-user')
                                     ->prefixIconColor('primary')
@@ -70,17 +70,31 @@ class KelasResource extends Resource
                                     ]),
                             ]),
 
-                        Select::make('kategori')
+                        Select::make('tingkat')
                             ->label('Tingkat')
                             ->options([
-                                '1 SD', '2 SD', '3 SD', '4 SD', '5 SD', '6 SD', '1 SMP','2 SMP', '3 SMP', '1 SMA','2 SMA', '3 SMA'
+                                'SD',
+                                'SMP',
+                                'SMA'
                             ])
                             ->native(false)
                             ->searchable()
                             ->placeholder('masukan tingkat siswa')
                             ->required(),
-                        Select::make('nama_kelas')
-                            ->label('Nama kelas')
+                        Select::make('no_kelas')
+                            ->label('No kelas')
+                            ->required()
+                            ->options([
+                                '1',
+                                '2',
+                                '3',
+                                '4',
+                                '5',
+                                '6'
+                            ])
+                            ->placeholder('masukan no kelas'),
+                        Select::make('disabilitas')
+                            ->label('Keterangan Disabilitas')
                             ->required()
                             ->options([
                                 'A (Tunanetra)' => 'A (Tunanetra)',
@@ -90,8 +104,7 @@ class KelasResource extends Resource
                                 'D1 (Tunadaksa)' => 'D1 (Tunadaksa)',
                                 'H/Au (Autis)' => 'H/Au (Autis)'
                             ])
-                            ->placeholder('masukan nama kelas'),
-
+                            ->placeholder('masukan no kelas'),
                     ])
             ]);
     }
@@ -104,10 +117,10 @@ class KelasResource extends Resource
                     ->label('Tingkat')
                     ->sortable()
                     ->searchable(),
-                    TextColumn::make('nama_kelas')
-                    ->label('Nama kelas')
+                TextColumn::make('no_kelas')
+                    ->label('No kelas')
                     ->copyable()
-                    ->copyMessage('nama kelas berhasil di salin')
+                    ->copyMessage('No kelas berhasil di salin')
                     ->icon('heroicon-o-building-library')
                     ->colors([
                         'sky' => 'A (Tunanetra)',
@@ -124,14 +137,36 @@ class KelasResource extends Resource
                 SelectFilter::make('kategori')
                     ->label('Jenjang Pendidikan')
                     ->options([
-                        '1 SD', '2 SD', '3 SD', '4 SD', '5 SD', '6 SD', '1 SMP','2 SMP', '3 SMP', '1 SMA','2 SMA', '3 SMA'
+                        '1 SD',
+                        '2 SD',
+                        '3 SD',
+                        '4 SD',
+                        '5 SD',
+                        '6 SD',
+                        '1 SMP',
+                        '2 SMP',
+                        '3 SMP',
+                        '1 SMA',
+                        '2 SMA',
+                        '3 SMA'
                     ]),
                 SelectFilter::make('tingkat')
                     ->label('Kelas')
                     ->options([
-                    '1 SD', '2 SD', '3 SD', '4 SD', '5 SD', '6 SD', '1 SMP','2 SMP', '3 SMP', '1 SMA','2 SMA', '3 SMA'
+                        '1 SD',
+                        '2 SD',
+                        '3 SD',
+                        '4 SD',
+                        '5 SD',
+                        '6 SD',
+                        '1 SMP',
+                        '2 SMP',
+                        '3 SMP',
+                        '1 SMA',
+                        '2 SMA',
+                        '3 SMA'
                     ]),
-                SelectFilter::make('nama_kelas')
+                SelectFilter::make('no_kelas')
                     ->label('Kebutuhan Khusus')
                     ->options([
                         'A (Tunanetra)' => 'A  (Tunanetra)',
@@ -168,8 +203,8 @@ class KelasResource extends Resource
                     // ->columns()
 
                     ->schema([
-                        TextEntry::make('siswas.nama')
-                            ->label('Nama Siswa')
+                        TextEntry::make('siswas.no')
+                            ->label('no Siswa')
                             ->icon('heroicon-o-user')
                             ->badge()
                             ->colors([
@@ -194,8 +229,8 @@ class KelasResource extends Resource
                         //     ])
                         //     ->badge(),
 
-                        TextEntry::make('nama_kelas')
-                            ->label('Nama Kelas')
+                        TextEntry::make('no_kelas')
+                            ->label('no Kelas')
                             ->colors([
                                 'sky' => 'A (Tunanetra)',
                                 'purple' => 'B (Tunarungu)',
