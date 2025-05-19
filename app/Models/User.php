@@ -48,10 +48,10 @@ class User extends Authenticatable
         ];
     }
 
-    public function klasifikasis(): HasMany
-    {
-        return $this->hasMany(Klasifikasi::class, 'admin_id');
-    }
+    // public function klasifikasis(): HasMany
+    // {
+    //     return $this->hasMany(Klasifikasi::class, 'admin_id');
+    // }
     public function siswas(): HasMany
     {
         return $this->hasMany(Siswa::class, 'admin_id');

@@ -29,9 +29,12 @@ class Siswa extends Model
         'sekolah_asal',
         'tgl_masuk',
         'tgl_keluar',
+        // 'tahun_masuk',
+        // 'tahun_keluar',
+        'tahun_ajaran',
         'status_pip',
         'admin_id',
-        'klasifikasi_id',
+        // 'klasifikasi_id',
         'kelas_id',
     ];
 
@@ -40,10 +43,10 @@ class Siswa extends Model
         return $this->belongsTo(User::class, 'admin_id');
     }
 
-    public function klasifikasi(): BelongsTo
-    {
-        return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
-    }
+    // public function klasifikasi(): BelongsTo
+    // {
+    //     return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
+    // }
 
     public function kelas(): BelongsTo
     {

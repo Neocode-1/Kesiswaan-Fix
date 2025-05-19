@@ -22,11 +22,12 @@ return new class extends Migration
             $table->string('sekolah_asal')->nullable();
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();
+            $table->integer('tahun_ajaran')->nullable();
             $table->text('alamat')->nullable();
             $table->string('telp_rumah')->nullable();
             $table->string('status_pip')->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();
-            $table->unsignedBigInteger('klasifikasi_id')->nullable();
+            // $table->unsignedBigInteger('klasifikasi_id')->nullable();
             $table->unsignedBigInteger('kelas_id')->nullable();
             $table->timestamps();
         });

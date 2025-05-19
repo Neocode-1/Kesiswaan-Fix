@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123')
         ]);
         $dataUser = User::factory(50)->create();
-        $dataKlasifikasi = Klasifikasi::factory(50)->create();
+        // $dataKlasifikasi = Klasifikasi::factory(50)->create();
         $dataSiswa = Siswa::factory(500)->create();
         $dataFamily = SiswaFamily::factory(500)->create();
         $dataRaport = Raport::factory(500)->create();
@@ -37,16 +37,16 @@ class DatabaseSeeder extends Seeder
         $dataKelas = Kelas::factory(72)->create();
         $dataPrestasi = Prestasi::factory(50)->create();
 
-        foreach ($dataKlasifikasi as $data) {
-            $data->update([
-                'admin_id' => User::all()->random()->id,
-            ]);
-        }
+        // foreach ($dataKlasifikasi as $data) {
+        //     $data->update([
+        //         'admin_id' => User::all()->random()->id,
+        //     ]);
+        // }
 
         foreach ($dataSiswa as $data) {
             $data->update([
                 'admin_id' => User::all()->random()->id,
-                'klasifikasi_id' => Klasifikasi::all()->random()->id,
+                // 'klasifikasi_id' => Klasifikasi::all()->random()->id,
                 'kelas_id' => Kelas::all()->random()->id,
             ]);
         }
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
         foreach ($dataRaport as $data) {
             $data->update([
                 'admin_id' => User::all()->random()->id,
-                'klasifikasi_id' => Klasifikasi::all()->random()->id,
+                // 'klasifikasi_id' => Klasifikasi::all()->random()->id,
             ]);
         }
         foreach ($dataRaport as $index => $raport) {
@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
         foreach ($dataIjazah as $data) {
             $data->update([
                 'admin_id' => User::all()->random()->id,
-                'klasifikasi_id' => Klasifikasi::all()->random()->id,
+                // 'klasifikasi_id' => Klasifikasi::all()->random()->id,
             ]);
         }
         foreach ($dataIjazah as $index => $ijazah) {
@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
         foreach ($dataAbsensi as $data) {
             $data->update([
                 'admin_id' => User::all()->random()->id,
-                'klasifikasi_id' => Klasifikasi::all()->random()->id,
+                // 'klasifikasi_id' => Klasifikasi::all()->random()->id,
             ]);
         }
 

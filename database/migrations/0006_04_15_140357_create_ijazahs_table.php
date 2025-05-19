@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('ijazahs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('admin_id')->nullable();
-            $table->unsignedBigInteger('klasifikasi_id')->nullable();
+            // $table->unsignedBigInteger('klasifikasi_id')->nullable();
             $table->unsignedBigInteger('siswa_id')->nullable();
-            $table->year('tahun_lulus');
+            // $table->year('tahun_lulus');
             $table->string('upload_file');
             $table->timestamps();
         });

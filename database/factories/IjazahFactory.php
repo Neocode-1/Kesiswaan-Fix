@@ -18,7 +18,7 @@ class IjazahFactory extends Factory
     {
         return [
             'upload_file' => 'ijazah_' . fake()->unique()->numerify('###') . '.pdf',
-            'tahun_lulus' => fake()->year(),
+            // 'tahun_lulus' => fake()->year(),
         ];
     }
 }

@@ -30,6 +30,7 @@ class SiswaFactory extends Factory
             'sekolah_asal' => fake()->company(),
             'tgl_masuk' => $entryDate,
             'tgl_keluar' => fake()->dateTimeBetween($entryDate,date('Y-m-d', strtotime($entryDate . ' +' . fake()->numberBetween(2, 10) . ' years'))),
+            'tahun_ajaran' => fake()->numberBetween(2022, 2027),
             'status_pip'=> fake()->randomElement(['Sudah', 'Belum']),
         ];
     }
