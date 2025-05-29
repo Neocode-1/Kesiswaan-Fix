@@ -96,7 +96,6 @@ class SiswaResource extends Resource
                                             'Laki-laki' => 'heroicon-o-user',
                                             'Perempuan' => 'heroicon-o-user-circle',
                                         ])
-
                                         ->colors([
                                             'Laki-laki' => 'sky',
                                             'Perempuan' => 'pink',
@@ -161,6 +160,20 @@ class SiswaResource extends Resource
                                         ->native(false)
                                         ->displayFormat('d/m/Y')
                                         ->required(),
+                                    Select::make('tahun_ajaran')
+                                        ->label('Tanggal Keluar Siswa')
+                                        ->placeholder('Masukkan Tahun Ajaran Siswa')
+                                        ->prefixIcon('heroicon-o-calendar-days')
+                                        ->prefixIconColor('primary')
+                                        ->required()
+                                        ->options([
+                                            2022,
+                                            2023,
+                                            2024,
+                                            2025,
+                                            2026,
+                                            2027
+                                        ]),
                                     Textarea::make('alamat')
                                         ->placeholder('Silahkan isi alamat lengkapnya disini')
                                         ->label('Alamat Lengkap Siswa')
@@ -367,18 +380,18 @@ class SiswaResource extends Resource
                             return $query;
                         }
                     ),
-                TextColumn::make('klasifikasi.tahun_masuk')
-                    ->iconColor('primary')
-                    ->icon('heroicon-o-calendar')
-                    ->searchable(
-                        query: function (Builder $query, string $search): Builder {
-                            $id = Klasifikasi::where('tahun_masuk', 'like', '%' . $search . '%')->first()->id ?? null;
-                            if ($id) {
-                                return $query->where('klasifikasi_id', 'like', '%' . $id . '%');
-                            }
-                            return $query;
-                        }
-                    ),
+                // TextColumn::make('klasifikasi.tahun_masuk')
+                //     ->iconColor('primary')
+                //     ->icon('heroicon-o-calendar')
+                //     ->searchable(
+                //         query: function (Builder $query, string $search): Builder {
+                //             $id = Klasifikasi::where('tahun_masuk', 'like', '%' . $search . '%')->first()->id ?? null;
+                //             if ($id) {
+                //                 return $query->where('klasifikasi_id', 'like', '%' . $id . '%');
+                //             }
+                //             return $query;
+                //         }
+                //     ),
                 TextColumn::make('alamat')
                     ->label('Alamat')
                     ->iconColor('primary')
