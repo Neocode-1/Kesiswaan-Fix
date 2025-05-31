@@ -16,8 +16,6 @@ class Klasifikasi extends Model
     protected $table = 'klasifikasis';
 
     protected $fillable = [
-        'tahun_masuk',
-        'tahun_keluar',
         'tahun_ajaran',
         'admin_id'
     ];

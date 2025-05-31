@@ -17,7 +17,7 @@ class Absensi extends Model
         'rekap_bulanan',
         'upload_file',
         'admin_id',
-        // 'klasifikasi_id',
+        'klasifikasi_id',
     ];
     public function admin(): BelongsTo
     {
