@@ -16,18 +16,20 @@ class PrestasiFactory extends Factory
      */
     public function definition(): array
     {
+        $seed = fake()->unique()->uuid;
+        $url = "https://picsum.photos/seed/$seed/200/300";
         return [
-            'nama' => $this->faker->name(),
-            'nama_prestasi' => $this->faker->randomElement([
+            'nama' => fake()->name(),
+            'nama_prestasi' => fake()->randomElement([
                 'Lomba Cerdas Cermat',
                 'Juara Futsal',
                 'Olimpiade Matematika',
                 'Lomba Pidato',
                 'Lomba Desain Poster'
             ]),
-            'tingkat' => $this->faker->randomElement(['Sekolah', 'Kecamatan', 'Kabupaten', 'Provinsi', 'Nasional']),
-            'foto_up' => 'prestasi_' . $this->faker->unique()->numerify('###') . '.jpg',
-            'tahun' => $this->faker->year(),
+            'tingkat' => fake()->randomElement(['Sekolah', 'Kecamatan', 'Kabupaten', 'Provinsi', 'Nasional', 'Internasional']),
+            'foto_upload' => $url,
+            'tahun' => fake()->year(),
         ];
     }
 }

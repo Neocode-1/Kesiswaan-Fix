@@ -16,31 +16,21 @@ class SiswaFactory extends Factory
      */
     public function definition(): array
     {
+        $entryDate = fake()->date();
+
         return [
-            'nama' => $this->faker->name,
-            'nisn' => $this->faker->unique()->numerify('##########'),
-            'ttl' => $this->faker->date('Y-m-d') . ' di ' . $this->faker->city,
-            'jenis_kelamin' => $this->faker->randomElement(['L', 'P']),
-            'agama' => $this->faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']),
-            'sklh_asal' => $this->faker->company . ' School',
-            'tgl_masuk' => $this->faker->date('Y-m-d'),
-            'tgl_keluar' => $this->faker->optional()->date('Y-m-d'),
-            'status_klrga' => $this->faker->randomElement(['Anak Kandung', 'Anak Angkat', 'Keponakan']),
-            'anak_ke' => $this->faker->numberBetween(1, 5),
-            'alamat' => $this->faker->address,
-            'telp_rumah' => $this->faker->optional()->phoneNumber,
-            'status_pip' => $this->faker->randomElement(['Ya', 'Tidak']),
-
-            // Data ortu
-            'nama_ortu' => $this->faker->optional()->name,
-            'alamat_ortu' => $this->faker->optional()->address,
-            'no_telp' => $this->faker->optional()->phoneNumber,
-            'pekerjaan' => $this->faker->optional()->jobTitle,
-
-            // Data wali
-            'nama_wali' => $this->faker->optional()->name,
-            'alamat_wali' => $this->faker->optional()->address,
-            'pekerjaan_wali' => $this->faker->optional()->jobTitle,
+            'nama' => fake()->name(),
+            'nisn' => fake()->numerify('##########'),
+            'tmpt_lahir' => fake()->city(),
+            'tgl_lahir' => fake()->date(),
+            'jenis_kelamin' => fake()->randomElement(['Laki-laki', 'Perempuan']),
+            'agama' => fake()->randomElement(['Islam', 'Kristen', 'Katholik', 'Hindu', 'Budha', 'Konghucu']),
+            'alamat' => fake()->address(),
+            'telp_rumah' => fake()->phoneNumber(),
+            'sekolah_asal' => fake()->company(),
+            'tgl_masuk' => $entryDate,
+            'tgl_keluar' => fake()->dateTimeBetween($entryDate,date('Y-m-d', strtotime($entryDate . ' +' . fake()->numberBetween(2, 10) . ' years'))),
+            'status_pip'=> fake()->randomElement(['Sudah', 'Belum']),
         ];
     }
 }

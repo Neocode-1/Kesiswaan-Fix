@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Siswa extends Model
 {
@@ -15,23 +20,53 @@ class Siswa extends Model
     protected $fillable = [
         'nama',
         'nisn',
-        'ttl',
+        'tmpt_lahir',
+        'tgl_lahir',
         'jenis_kelamin',
         'agama',
-        'sklh_asal',
-        'tgl_masuk',
-        'tgl_keluar',
-        'status_klrga',
-        'anak_ke',
         'alamat',
         'telp_rumah',
+        'sekolah_asal',
+        'tgl_masuk',
+        'tgl_keluar',
         'status_pip',
-        'nama_ortu',
-        'alamat_ortu',
-        'no_telp',
-        'pekerjaan',
-        'nama_wali',
-        'alamat_wali',
-        'pekerjaan_wali',
+        'admin_id',
+        'klasifikasi_id',
+        'kelas_id',
     ];
+
+    public function admin(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    public function klasifikasi(): BelongsTo
+    {
+        return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
+    }
+
+    public function kelas(): BelongsTo
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
+
+    public function family(): HasOne
+    {
+        return $this->hasOne(SiswaFamily::class, 'siswa_id');
+    }
+
+    public function raports(): HasMany
+    {
+        return $this->hasMany(Raport::class, 'siswa_id');
+    }
+
+    public function ijazahs(): HasMany
+    {
+        return $this->hasMany(Ijazah::class, 'siswa_id');
+    }
+
+    public function prestasis(): HasMany
+    {
+        return $this->hasMany(Prestasi::class, 'siswa_id');
+    }
 }

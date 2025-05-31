@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ijazah extends Model
 {
@@ -13,7 +14,25 @@ class Ijazah extends Model
     protected $table = 'ijazahs';
 
     protected $fillable = [
+        'admin_id',
+        // 'klasifikasi_id',
+        'siswa_id',
         'upload_file',
-        'tahun_lulus',
+        // 'tahun_lulus',
     ];
+
+    public function admin(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    // public function klasifikasi(): BelongsTo
+    // {
+    //     return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
+    // }
+
+    public function siswa(): BelongsTo
+    {
+        return $this->belongsTo(Siswa::class, 'siswa_id');
+    }
 }
