@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Klasifikasi extends Model
+class TahunAjaran extends Model
 {
     /** @use HasFactory<\Database\Factories\KlarifikasiFactory> */
     use HasFactory;
 
-    protected $table = 'klasifikasis';
+    protected $table = 'tahun_ajarans';
 
     protected $fillable = [
         'tahun_ajaran',
@@ -27,21 +27,21 @@ class Klasifikasi extends Model
 
     public function siswas(): HasMany
     {
-        return $this->hasMany(Siswa::class, 'klasifikasi_id');
+        return $this->hasMany(Siswa::class, 'tahun_ajaran_id');
     }
 
-    public function rsports(): HasMany
+    public function raports(): HasMany
     {
-        return $this->hasMany(Raport::class, 'klasifikasi_id');
+        return $this->hasMany(Raport::class, 'tahun_ajaran_id');
     }
 
     public function ijazahs(): HasMany
     {
-        return $this->hasMany(Ijazah::class, 'klasifikasi_id');
+        return $this->hasMany(Ijazah::class, 'tahun_ajaran_id');
     }
 
     public function absensis(): HasMany
     {
-        return $this->hasMany(Absensi::class, 'klasifikasi_id');
+        return $this->hasMany(Absensi::class, 'tahun_ajaran_id');
     }
 }

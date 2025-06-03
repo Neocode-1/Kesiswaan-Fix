@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('upload_file');
             $table->text('catatan');
             $table->unsignedBigInteger('admin_id')->nullable();
-            // $table->unsignedBigInteger('klasifikasi_id')->nullable();
+            $table->unsignedBigInteger('tahun_ajaran_id')->nullable();
             $table->unsignedBigInteger('siswa_id')->nullable();
             $table->timestamps();
         });

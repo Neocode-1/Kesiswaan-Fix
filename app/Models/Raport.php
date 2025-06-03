@@ -15,7 +15,7 @@ class Raport extends Model
 
     protected $fillable = [
         'admin_id',
-        // 'klasifikasi_id',
+        'tahun_ajaran_id',
         'siswa_id',
         'upload_file',
         'catatan',
@@ -26,10 +26,10 @@ class Raport extends Model
         return $this->belongsTo(User::class, 'admin_id');
     }
 
-    // public function klasifikasi(): BelongsTo
-    // {
-    //     return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
-    // }
+    public function tahunajaran(): BelongsTo
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
+    }
 
     public function siswa(): BelongsTo
     {

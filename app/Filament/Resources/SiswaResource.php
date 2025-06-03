@@ -10,7 +10,7 @@ use App\Models\Siswa;
 use App\Models\Prestasi;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Models\Klasifikasi;
+use App\Models\TahunAjaran;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -380,18 +380,18 @@ class SiswaResource extends Resource
                             return $query;
                         }
                     ),
-                // TextColumn::make('klasifikasi.tahun_masuk')
-                //     ->iconColor('primary')
-                //     ->icon('heroicon-o-calendar')
-                //     ->searchable(
-                //         query: function (Builder $query, string $search): Builder {
-                //             $id = Klasifikasi::where('tahun_masuk', 'like', '%' . $search . '%')->first()->id ?? null;
-                //             if ($id) {
-                //                 return $query->where('klasifikasi_id', 'like', '%' . $id . '%');
-                //             }
-                //             return $query;
-                //         }
-                //     ),
+                TextColumn::make('TahunAjaran.tahun_masuk')
+                    ->iconColor('primary')
+                    ->icon('heroicon-o-calendar')
+                    ->searchable(
+                        query: function (Builder $query, string $search): Builder {
+                            $id = TahunAjaran::where('tahun_masuk', 'like', '%' . $search . '%')->first()->id ?? null;
+                            if ($id) {
+                                return $query->where('TahunAjaran_id', 'like', '%' . $id . '%');
+                            }
+                            return $query;
+                        }
+                    ),
                 TextColumn::make('alamat')
                     ->label('Alamat')
                     ->iconColor('primary')

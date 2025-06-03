@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Siswa;
 use App\Models\Klasifikasi;
+use App\Models\TahunAjaran;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use Filament\Forms\Components\Select;
@@ -24,11 +25,11 @@ class SiswaChart extends ChartWidget
     protected function getFormSchema(): array
     {
         return [
-            Select::make('tahun_masuk')
+            Select::make('tahun_ajaran')
                 ->label('Tahun Masuk')
                 ->options(
-                    Klasifikasi::orderBy('tahun_masuk', 'desc')
-                        ->pluck('tahun_masuk', 'tahun_masuk')
+                    TahunAjaran::orderBy('tahun_ajaran', 'desc')
+                        ->pluck('tahun_ajaran', 'tahun_ajaran')
                         ->toArray()
                 )
                 ->default(now()->year),
@@ -38,11 +39,11 @@ class SiswaChart extends ChartWidget
     // Data Chart
     protected function getData(): array
     {
-        $tahun = $this->filterFormData['tahun_masuk'] ?? now()->year;
+        $tahun = $this->filterFormData['tahun_ajaran'] ?? now()->year;
 
         $data = Trend::query(
                 Siswa::whereHas('klasifikasi', function ($query) use ($tahun) {
-                    $query->where('tahun_masuk', $tahun);
+                    $query->where('tahun_ajaran', $tahun);
                 })
             )
             ->between(

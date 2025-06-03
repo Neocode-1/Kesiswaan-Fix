@@ -11,9 +11,9 @@
          */
         public function up(): void
         {
-            Schema::create('klasifikasis', function (Blueprint $table) {
+            Schema::create('tahun_ajarans', function (Blueprint $table) {
                 $table->id();
-                $table->integer('tahun_masuk');
+                $table->integer('tahun_ajaran');
                 $table->unsignedBigInteger('admin_id')->nullable();
                 $table->timestamps();
             });
@@ -24,6 +24,6 @@
          */
         public function down(): void
         {
-            Schema::dropIfExists('klarifikasis');
+            Schema::dropIfExists('tahun_ajarans');
         }
     };

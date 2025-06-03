@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('telp_rumah')->nullable();
             $table->string('status_pip')->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();
-            // $table->unsignedBigInteger('klasifikasi_id')->nullable();
+            $table->unsignedBigInteger('tahun_ajaran_id')->nullable();
             $table->unsignedBigInteger('kelas_id')->nullable();
             $table->timestamps();
         });

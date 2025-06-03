@@ -31,7 +31,7 @@ class Siswa extends Model
         'tgl_keluar',
         'status_pip',
         'admin_id',
-        'klasifikasi_id',
+        'tahun_ajaran_id',
         'kelas_id',
     ];
 
@@ -40,9 +40,9 @@ class Siswa extends Model
         return $this->belongsTo(User::class, 'admin_id');
     }
 
-    public function klasifikasi(): BelongsTo
+    public function tahunajaran(): BelongsTo
     {
-        return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
     }
 
     public function kelas(): BelongsTo

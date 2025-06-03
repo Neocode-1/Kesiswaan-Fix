@@ -17,15 +17,15 @@ class Absensi extends Model
         'rekap_bulanan',
         'upload_file',
         'admin_id',
-        'klasifikasi_id',
+        'tahun_ajaran_id',
     ];
     public function admin(): BelongsTo
     {
         return $this->belongsTo(User::class, 'admin_id');
     }
 
-    // public function klasifikasi(): BelongsTo
-    // {
-    //     return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id');
-    // }
+    public function tahunajaran(): BelongsTo
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
+    }
 }
