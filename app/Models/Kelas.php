@@ -19,12 +19,11 @@ class Kelas extends Model
         'tingkat',
         'nama_kelas',
         'disabilitas',
-        'absensi_id',
     ];
 
-    public function absensi(): BelongsTo
+    public function absens(): HasMany
     {
-        return $this->belongsTo(Absensi::class, 'absensi_id');
+        return $this->hasMany(Absensi::class, 'kelas_id');
     }
     public function siswas(): HasMany
     {

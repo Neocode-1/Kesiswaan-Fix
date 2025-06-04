@@ -60,9 +60,9 @@ class Siswa extends Model
         return $this->hasMany(Raport::class, 'siswa_id');
     }
 
-    public function ijazahs(): HasMany
+    public function ijazah(): HasOne
     {
-        return $this->hasMany(Ijazah::class, 'siswa_id');
+        return $this->hasOne(Ijazah::class, 'siswa_id');
     }
 
     public function prestasis(): HasMany
