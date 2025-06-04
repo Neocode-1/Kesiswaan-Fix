@@ -37,12 +37,10 @@ return new class extends Migration
         });
         Schema::table('absensis', function (Blueprint $table) {
             $table->foreign('admin_id')->after('id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('tahun_ajaran_id')->after('admin_id')->references('id')->on('tahun_ajarans')->onDelete('set null');
+            $table->foreign('kelas_id')->after('admin_id')->references('id')->on('kelas')->onDelete('set null');
+            $table->foreign('tahun_ajaran_id')->after('kelas_id')->references('id')->on('tahun_ajarans')->onDelete('set null');
         });
 
-        Schema::table('kelas', function (Blueprint $table) {
-            $table->foreign('absensi_id')->after('id')->references('id')->on('absensis')->onDelete('set null');
-        });
     }
 
     /**

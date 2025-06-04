@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('tingkat');
             $table->string('nama_kelas');
             $table->string('disabilitas');
-            $table->unsignedBigInteger('absensi_id')->nullable();
             $table->timestamps();
         });
     }

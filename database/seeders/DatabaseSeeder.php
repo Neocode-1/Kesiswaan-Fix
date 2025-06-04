@@ -86,13 +86,8 @@ class DatabaseSeeder extends Seeder
         foreach ($dataAbsensi as $data) {
             $data->update([
                 'admin_id' => User::all()->random()->id,
+                'kelas_id' => Kelas::all()->random()->id,
                 'tahun_ajaran_id' => TahunAjaran::all()->random()->id,
-            ]);
-        }
-
-        foreach ($dataKelas as $data) {
-            $data->update([
-                'absensi_id' => Absensi::all()->random()->id,
             ]);
         }
 

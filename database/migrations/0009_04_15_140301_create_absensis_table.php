@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('rekap_bulanan');
             $table->string('upload_file');
             $table->unsignedBigInteger('admin_id')->nullable();
+            $table->unsignedBigInteger('kelas_id')->nullable();
             $table->unsignedBigInteger('tahun_ajaran_id')->nullable();
             $table->timestamps();
         });
