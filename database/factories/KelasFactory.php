@@ -18,7 +18,7 @@ class KelasFactory extends Factory
     {
         return [
             'tingkat' => fake()->randomElement(['SD', 'SMP', 'SMA']),
-            'nama_kelas' => fake()->randomElement(['1','2', '3', '4', '5', '6']),
+            'no_kelas' => fake()->randomElement(['1','2', '3', '4', '5', '6']),
             'disabilitas' => fake()->randomElement(['A (Tunanetra)', 'B (Tunarungu)', 'C (Tunagrahita)', 'DS (Down Syndrom)', 'D1 (Tunadaksa)', 'H/Au (Autis)']),
         ];
     }

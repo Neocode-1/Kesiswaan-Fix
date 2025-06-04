@@ -113,12 +113,27 @@ class KelasResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('kategori')
+                TextColumn::make('tingkat')
                     ->label('Tingkat')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('no_kelas')
                     ->label('No kelas')
+                    ->copyable()
+                    ->copyMessage('No kelas berhasil di salin')
+                    ->icon('heroicon-o-building-library')
+                    ->colors([
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                        '5',
+                        '6'
+                    ])
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('disabilitas')
+                    ->label('Disabilitas')
                     ->copyable()
                     ->copyMessage('No kelas berhasil di salin')
                     ->icon('heroicon-o-building-library')
@@ -134,40 +149,18 @@ class KelasResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('kategori')
-                    ->label('Jenjang Pendidikan')
-                    ->options([
-                        '1 SD',
-                        '2 SD',
-                        '3 SD',
-                        '4 SD',
-                        '5 SD',
-                        '6 SD',
-                        '1 SMP',
-                        '2 SMP',
-                        '3 SMP',
-                        '1 SMA',
-                        '2 SMA',
-                        '3 SMA'
-                    ]),
-                SelectFilter::make('tingkat')
+                SelectFilter::make('no_kelas')
                     ->label('Kelas')
                     ->options([
-                        '1 SD',
-                        '2 SD',
-                        '3 SD',
-                        '4 SD',
-                        '5 SD',
-                        '6 SD',
-                        '1 SMP',
-                        '2 SMP',
-                        '3 SMP',
-                        '1 SMA',
-                        '2 SMA',
-                        '3 SMA'
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                        '5',
+                        '6',
                     ]),
-                SelectFilter::make('no_kelas')
-                    ->label('Kebutuhan Khusus')
+                SelectFilter::make('disabilitas')
+                    ->label('Disabilitas')
                     ->options([
                         'A (Tunanetra)' => 'A  (Tunanetra)',
                         'B (Tunarungu)' => 'B (Tunarungu)',
@@ -175,6 +168,13 @@ class KelasResource extends Resource
                         'DS (Down Syndrom)' => 'DS (Down Syndrom)',
                         'D1 (Tunadaksa)' => 'D1 (Tunadaksa)',
                         'H/Au (Autis)' => 'H/Au (Autis)'
+                    ]),
+                SelectFilter::make('tingkat')
+                    ->label('Jenjang')
+                    ->options([
+                        'SD',
+                        'SMP',
+                        'SMA',
                     ])
             ])
             ->actions([

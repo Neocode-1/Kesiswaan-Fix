@@ -17,7 +17,7 @@ class Kelas extends Model
 
     protected $fillable = [
         'tingkat',
-        'nama_kelas',
+        'no_kelas',
         'disabilitas',
     ];
 

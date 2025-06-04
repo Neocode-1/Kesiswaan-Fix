@@ -46,17 +46,17 @@ class StatsOverview extends BaseWidget
         ];
 
         // Loop semua kelas berdasarkan kategori
-        $kelasList = Kelas::select('kategori')
+        $kelasList = Kelas::select('disabilitas')
             // ->distinct()
-            ->orderBy('kategori')
+            ->orderBy('disabilitas')
             ->get();
 
         $warna = ['primary', 'warning', 'danger', 'success', 'gray', 'info', 'pink'];
 
         foreach ($kelasList as $index => $kelas) {
-            $jumlah = Kelas::where('kategori', $kelas->kategori)->first()?->siswas()->count() ?? 0;
-            $cards[] = Stat::make("🏫 {$kelas->kategori}", $jumlah)
-                ->description("Siswa di {$kelas->kategori}")
+            $jumlah = Kelas::where('disabilitas', $kelas->disabilitas)->first()?->siswas()->count() ?? 0;
+            $cards[] = Stat::make("🏫 {$kelas->disabilitas}", $jumlah)
+                ->description("Siswa di {$kelas->disabilitas}")
                 ->color($warna[$index % count($warna)])
                 ->chart(array_map(fn() => rand(1, 10), range(1, 7)));
         }
