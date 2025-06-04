@@ -380,14 +380,14 @@ class SiswaResource extends Resource
                             return $query;
                         }
                     ),
-                TextColumn::make('TahunAjaran.tahun_masuk')
+                TextColumn::make('tahunajaran.tahun_ajaran')
                     ->iconColor('primary')
                     ->icon('heroicon-o-calendar')
                     ->searchable(
                         query: function (Builder $query, string $search): Builder {
-                            $id = TahunAjaran::where('tahun_masuk', 'like', '%' . $search . '%')->first()->id ?? null;
+                            $id = TahunAjaran::where('tahun_ajaran', 'like', '%' . $search . '%')->first()->id ?? null;
                             if ($id) {
-                                return $query->where('TahunAjaran_id', 'like', '%' . $id . '%');
+                                return $query->where('tahun_ajaran_id', 'like', '%' . $id . '%');
                             }
                             return $query;
                         }

@@ -3,7 +3,6 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Siswa;
-use App\Models\Klasifikasi;
 use App\Models\TahunAjaran;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
@@ -26,7 +25,7 @@ class SiswaChart extends ChartWidget
     {
         return [
             Select::make('tahun_ajaran')
-                ->label('Tahun Masuk')
+                ->label('Tahun Ajaran')
                 ->options(
                     TahunAjaran::orderBy('tahun_ajaran', 'desc')
                         ->pluck('tahun_ajaran', 'tahun_ajaran')
@@ -42,7 +41,7 @@ class SiswaChart extends ChartWidget
         $tahun = $this->filterFormData['tahun_ajaran'] ?? now()->year;
 
         $data = Trend::query(
-                Siswa::whereHas('klasifikasi', function ($query) use ($tahun) {
+                Siswa::whereHas('tahunajaran', function ($query) use ($tahun) {
                     $query->where('tahun_ajaran', $tahun);
                 })
             )
