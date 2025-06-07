@@ -365,15 +365,15 @@ class SiswaResource extends Resource
                         }
                     })
                     ->badge(),
-                TextColumn::make('kelas.nama_kelas')
+                TextColumn::make('kelas.disabilitas')
                     ->iconColor('primary')
                     ->icon('heroicon-o-academic-cap')
                     ->sortable()
                     ->searchable()
-                    ->description(fn(Siswa $record): string => "" . $record->kelas->tingkat)
+                    ->description(fn(Siswa $record): string => "" . $record->kelas->no_kelas)
                     ->searchable(
                         query: function (Builder $query, string $search): Builder {
-                            $id = Kelas::where('nama_kelas', 'like', '%' . $search . '%')->first()->id ?? null;
+                            $id = Kelas::where('disabilitas', 'like', '%' . $search . '%')->first()->id ?? null;
                             if ($id) {
                                 return $query->where('kelas_id', 'like', '%' . $id . '%');
                             }
