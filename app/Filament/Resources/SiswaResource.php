@@ -370,7 +370,7 @@ class SiswaResource extends Resource
                     ->icon('heroicon-o-academic-cap')
                     ->sortable()
                     ->searchable()
-                    ->description(fn(Siswa $record): string => "" . $record->kelas->no_kelas)
+                    ->description(fn(Siswa $record): string => " " . $record->kelas->no_kelas . " " . $record->kelas->tingkat)
                     ->searchable(
                         query: function (Builder $query, string $search): Builder {
                             $id = Kelas::where('disabilitas', 'like', '%' . $search . '%')->first()->id ?? null;
