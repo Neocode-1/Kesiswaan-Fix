@@ -203,8 +203,8 @@ class KelasResource extends Resource
                     // ->columns()
 
                     ->schema([
-                        TextEntry::make('siswas.no')
-                            ->label('no Siswa')
+                        TextEntry::make('siswas.nisn')
+                            ->label('NISN Siswa')
                             ->icon('heroicon-o-user')
                             ->badge()
                             ->colors([
@@ -218,19 +218,8 @@ class KelasResource extends Resource
                             ->badge()
                             ->icon('heroicon-o-arrow-up-tray'),
 
-                        // Textentry::make('kebutuhan')
-                        //     ->label('Kebutuhan Khusus')
-                        //     ->colors([
-                        //         'sky' => 'Tunarungu',
-                        //         'purple' => 'Autis',
-                        //         'success' => 'Tunadaksa',
-                        //         'info' => 'Tunawicara',
-                        //         'blue' => 'Tunagrahirta'
-                        //     ])
-                        //     ->badge(),
-
-                        TextEntry::make('no_kelas')
-                            ->label('no Kelas')
+                        TextEntry::make('disabilitas')
+                            ->label('Disabilitas')
                             ->colors([
                                 'sky' => 'A (Tunanetra)',
                                 'purple' => 'B (Tunarungu)',
